@@ -1,0 +1,209 @@
+﻿$axure.loadCurrentPage({
+  "url":"cadastro.html",
+  "generationDate":new Date(1548194919407.33),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"93edf93686734229a77de577cf7d46fa",
+    "type":"Axure:Page",
+    "name":"Cadastro",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFCCCCCC},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"Applied Font",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"abe08794986b404ea9db96fe89601bc5",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFD7FFD4},
+            "location":{
+              "x":390,
+              "y":90},
+            "size":{
+              "width":500,
+              "height":320}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"00e767ad12024e2788247919e995978d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFD7FFD4},
+                "location":{
+                  "x":390,
+                  "y":90},
+                "size":{
+                  "width":500,
+                  "height":320}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/home/u0.png"}},
+{
+          "id":"610ab8be8876483fadde85058fa281a2",
+          "label":"idTextField",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "horizontalAlignment":"center",
+            "location":{
+              "x":410,
+              "y":245},
+            "size":{
+              "width":450,
+              "height":25}},
+          "adaptiveStyles":{
+},
+          "placeholderText":"Digite seu RA"},
+{
+          "id":"6635a6e8b8ba401eb5c315ffe99c65c1",
+          "label":"passwordTextField",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "horizontalAlignment":"center",
+            "location":{
+              "x":410,
+              "y":280},
+            "size":{
+              "width":450,
+              "height":25}},
+          "adaptiveStyles":{
+},
+          "placeholderText":"Digite sua senha"},
+{
+          "id":"775f8ed9f1eb437686908a376cee95c5",
+          "label":"submit",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "fontSize":"28px",
+            "location":{
+              "x":410,
+              "y":348},
+            "size":{
+              "width":450,
+              "height":45}},
+          "adaptiveStyles":{
+},
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"Case 1",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"closeCurrent",
+                      "description":"Close Current Window"},
+{
+                      "action":"linkWindow",
+                      "description":"Open Home in Current Window",
+                      "target":{
+                        "targetType":"page",
+                        "url":"home.html",
+                        "includeVariables":true},
+                      "linkType":"current"}]}]}},
+          "tabbable":true},
+{
+          "id":"891c998a16824d398e6f170d24fe34ea",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "fontSize":"36px",
+            "location":{
+              "x":410,
+              "y":100},
+            "size":{
+              "width":290,
+              "height":46}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"9c463793ca8c42c09aa4df26142599fd",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontSize":"36px",
+                "location":{
+                  "x":410,
+                  "y":100},
+                "size":{
+                  "width":290,
+                  "height":46}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"8e7a52ff35cd4d129cb9290cad12b987",
+          "label":"idTextField",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "horizontalAlignment":"center",
+            "location":{
+              "x":410,
+              "y":210},
+            "size":{
+              "width":450,
+              "height":25}},
+          "adaptiveStyles":{
+},
+          "placeholderText":"Digite seu RA"}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "abe08794986b404ea9db96fe89601bc5":{
+      "scriptId":"u0"},
+    "00e767ad12024e2788247919e995978d":{
+      "scriptId":"u1"},
+    "610ab8be8876483fadde85058fa281a2":{
+      "scriptId":"u2"},
+    "6635a6e8b8ba401eb5c315ffe99c65c1":{
+      "scriptId":"u3"},
+    "775f8ed9f1eb437686908a376cee95c5":{
+      "scriptId":"u4"},
+    "891c998a16824d398e6f170d24fe34ea":{
+      "scriptId":"u5"},
+    "9c463793ca8c42c09aa4df26142599fd":{
+      "scriptId":"u6"},
+    "8e7a52ff35cd4d129cb9290cad12b987":{
+      "scriptId":"u7"}}});
