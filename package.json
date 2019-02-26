@@ -1,0 +1,23 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "IT Sistema 360",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitorArtoni/IT-Sistema-360.git"
+  },
+  "author": "Vitor Artoni de Marcio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VitorArtoni/IT-Sistema-360/issues"
+  },
+  "homepage": "https://github.com/VitorArtoni/IT-Sistema-360#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
