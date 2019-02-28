@@ -123,7 +123,7 @@
                       "description":"Open Page 2 in Current Window",
                       "target":{
                         "targetType":"page",
-                        "url":"page_2.html",
+                        //"url":"page_2.html",
                         "includeVariables":true},
                       "linkType":"current"}]}]}},
           "tabbable":true},
