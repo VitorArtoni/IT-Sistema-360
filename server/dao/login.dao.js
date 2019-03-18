@@ -1,19 +1,6 @@
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'sistema_360'
-});
+const connection = require('../database');
 
-connection.connect(function (err) {
-    if (!err)
-        console.log('Connected to database');
-    else
-        console.log('Could not connect to database ' + err);
-});
-
-exports.loginProfessor = function (req, res) {
+const loginProfessor = function (req, res) {
     var matricula = req.body.matricula;
     var senha = req.body.senha;
 
@@ -49,4 +36,21 @@ exports.loginProfessor = function (req, res) {
                 }
             }
         });
+};
+
+const loginAluno = function (req, res) {
+    var ra = req.body.ra;
+    var senha = req.body.password;
+
+    connection.query('SELECT * FROM `aluno` WHERE `RA` = ? AND `Senha` = ?', [ra, senha],
+        function (error, results, fields) {
+            if (error) {
+                console.log("Ocorreu algum erro");
+            }
+        });
+};
+
+module.exports = {
+    loginAluno,
+    loginProfessor
 }
