@@ -38,16 +38,15 @@ const loginProfessor = function (req, res) {
         });
 };
 
-const loginAluno = function (req, res) {
-    var ra = req.body.ra;
-    var senha = req.body.password;
+const loginAluno = async function (req, res) {
+    let ra = req.ra;
+    let senha = req.password;
 
-    connection.query('SELECT * FROM `aluno` WHERE `RA` = ? AND `Senha` = ?', [ra, senha],
-        function (error, results, fields) {
-            if (error) {
-                console.log("Ocorreu algum erro");
-            }
-        });
+    return await connection.query('SELECT * FROM `aluno` WHERE `RA` = ? AND `Senha` = ?', [ra, senha])
+        .then(results => {
+            return results;
+        })
+        .catch(err => console.log(err));
 };
 
 module.exports = {
