@@ -1,4 +1,5 @@
 'use strict';
+
 const path = require('path');
 const db = require('../../dao/login.dao');
 
@@ -21,6 +22,10 @@ const loginAluno = (req, res) => {
                 console.log('RA e/ou Senha inválida!');
             res.redirect('/login');
         });
+    }
+    else{
+        console.log('Por favor digite seu RA e senha');
+        res.redirect('/login');
     }
 };
 

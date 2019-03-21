@@ -1,8 +1,8 @@
 const connection = require('../database');
 
 const loginProfessor = function (req, res) {
-    var matricula = req.body.matricula;
-    var senha = req.body.senha;
+    let matricula = req.body.matricula;
+    let senha = req.body.senha;
 
     connection.query('SELECT * FROM Professor WHERE matricula= ?', [matricula],
         function (error, results, fields) {

@@ -62,11 +62,11 @@ const configureApp = app => {
 const initRoutes = app => {
     const home = require('./routes/home');
     const login = require('./routes/login');
-    const register = require('./routes/register');
+    const cadastro = require('./routes/cadastro');
 
     app.use('/home', home());
     app.use('/login', login());
-    app.use('/register', register());
+    app.use('/cadastro', cadastro());
 };
 
 const startApp = app => {

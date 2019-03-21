@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-const controller = require('./register.controller');
+const controller = require('./cadastro.controller');
 
 const redirectHome = (req, res, next) => {
     if (req.session.userId)
@@ -18,8 +18,8 @@ module.exports = (middlewares) => {
         middlewares.forEach(middleware => router.use(middleware));
     }
 
-    router.get('/', redirectHome, controller.getRegister);
-    router.post('/', redirectHome, controller.register);
+    router.get('/', redirectHome, controller.getCadastro);
+    router.post('/', redirectHome, controller.cadastroAluno);
 
     return router;
 }
