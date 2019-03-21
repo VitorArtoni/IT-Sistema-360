@@ -4,10 +4,9 @@ const path = require('path');
 
 const getHome = (req, res) => {
     res.sendFile(path.join(__dirname, '../../../public/home.html'));
-}
+};
 
 const logout = (req, res) => {
-    console.log('aqui');
     req.session.destroy(err => {
         if (err) {
             return res.redirect('/home');

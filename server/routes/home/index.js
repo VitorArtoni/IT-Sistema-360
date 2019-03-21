@@ -1,7 +1,6 @@
 'use strcit'
 
 const express = require('express');
-
 const controller = require('./home.controller');
 
 const redirectLogin = (req, res, next) => {
@@ -19,7 +18,7 @@ module.exports = (middlewares) => {
     }
 
     router.get('/', redirectLogin, controller.getHome);
-    router.post('/logout', controller.logout);
+    router.get('/logout', redirectLogin, controller.logout);
 
     return router;
 };
