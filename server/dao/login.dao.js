@@ -40,9 +40,8 @@ const loginProfessor = function (req, res) {
 
 const loginAluno = async function (req, res) {
     let ra = req.ra;
-    let senha = req.password;
 
-    return await connection.query('SELECT * FROM `aluno` WHERE `RA` = ? AND `Senha` = ?', [ra, senha])
+    return await connection.query('SELECT * FROM `aluno` WHERE `RA` = ?', [ra])
         .then(results => {
             return results;
         })

@@ -17,8 +17,10 @@ const cadastroAluno = (req, res) => {
                 }
             })
             .catch(err => {
-                if (err.code = 'ER_DUP_ENTRY')
+                console.log(err);
+                if (err.code === 'ER_DUP_ENTRY')
                     console.log('Este RA já foi cadastrado');
+            
                 res.redirect('/cadastro');
             });
     }
