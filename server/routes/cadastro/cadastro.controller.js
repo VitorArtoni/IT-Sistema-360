@@ -7,6 +7,10 @@ const getCadastro = (req, res) => {
     res.sendFile(path.join(__dirname, '../../../public/cadastro.html'));
 }
 
+const getCadastroProfessor = (req, res) => {
+    res.sendFile(path.join(__dirname, '../../../public/cadastroProfessor.html'));
+}
+
 const cadastroAluno = (req, res) => {
     if (req.body.nome && req.body.ra && req.body.senha) {
         db.cadastroAluno(req.body)
@@ -20,12 +24,33 @@ const cadastroAluno = (req, res) => {
                 console.log(err);
                 if (err.code === 'ER_DUP_ENTRY')
                     console.log('Este RA já foi cadastrado');
-            
+
                 res.redirect('/cadastro');
             });
     }
-};
+}
+
+const cadastroProfessor = (req, res) => {
+    if (req.body.nome && req.body.matricula && req.body.senha) {
+        db.cadastroProfessor(req.body)
+            .then(result => {
+                if (result.affectedRows > 0) {
+                    console.log('Professor cadastrado com sucesso');
+                    res.redirect('/login');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                if (err.code === 'ER_DUP_ENTRY')
+                    console.log('Esta matrícula já foi cadastrada');
+                res.redirect('/cadastro/professor');
+            });
+    }
+}
+
 module.exports = {
     getCadastro,
-    cadastroAluno
+    getCadastroProfessor,
+    cadastroAluno,
+    cadastroProfessor
 }

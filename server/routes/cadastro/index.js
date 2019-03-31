@@ -19,7 +19,10 @@ module.exports = (middlewares) => {
     }
 
     router.get('/', redirectHome, controller.getCadastro);
+    router.get('/professor', redirectHome, controller.getCadastroProfessor);
+
     router.post('/', redirectHome, controller.cadastroAluno);
+    router.post('/professor', redirectHome, controller.cadastroProfessor);
 
     return router;
 }
