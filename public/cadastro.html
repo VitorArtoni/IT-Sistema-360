@@ -5,18 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/front-pages.css">
 
   <title>Cadastro</title>
 </head>
 
 <body>
   <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <div class="card mt-3 tab-card">
-          <div class="card-header tab-card-header">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-4">
+        <div class="card mt-5 tab-card">
+          <div id="card-header" class="card-header tab-card-header">
             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
               <li class="nav-item">
                 <a class="nav-link" id="tab1" data-toggle="tab" href="#one" role="tab" aria-controls="One">
@@ -29,16 +29,16 @@
             <div class="tab-pane fade show active p-3" role="tabpanel" aria-labelledby="tab1">
               <form method='POST' action='/cadastro'>
                 <div>
-                  <input name="nome" type="text" value="" placeholder="Digite seu nome" required/>
+                  <input class="mt-2 col-11" name="nome" type="text" value="" placeholder="Digite seu nome" required />
                 </div>
                 <div>
-                  <input name="ra" type="text" value="" placeholder="Digite seu RA" required/>
+                  <input class="mt-2 col-11" name="ra" type="text" value="" placeholder="Digite seu RA" required />
                 </div>
                 <div>
-                  <input name="senha" type="password" value="" placeholder="Digite sua senha" required/>
+                  <input class="mt-2 col-11" name="senha" type="password" value="" placeholder="Digite sua senha" required />
                 </div>
-                <div>
-                  <input class="btn btn-primary" type="submit" value="Cadastrar" method="post" />
+                <div class="row mt-4 col-6">
+                  <input class="ml-1 btn btn-primary" type="submit" value="Cadastrar" method="post"/>
                 </div>
               </form>
             </div>
