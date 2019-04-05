@@ -4,11 +4,11 @@ const path = require('path');
 const db = require('../../dao/cadastro.dao');
 
 const getCadastro = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../public/cadastro.html'));
+    res.sendFile(path.join(__dirname, '../../../src/public/cadastro.html'));
 }
 
 const getCadastroProfessor = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../public/cadastroProfessor.html'));
+    res.sendFile(path.join(__dirname, '../../../src/public/cadastroProfessor.html'));
 }
 
 const cadastroAluno = (req, res) => {

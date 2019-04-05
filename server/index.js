@@ -9,8 +9,8 @@ const configureApp = app => {
         silent: true
     });
 
-    app.use('/', express.static('public'));
-    app.use(express.static('public'));
+    app.use('/', express.static('src'));
+    app.use(express.static('src'));
     app.use(bodyParser.urlencoded({
         extended: true
     }));
