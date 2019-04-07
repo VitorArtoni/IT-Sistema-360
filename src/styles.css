@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+
+body{
+    font-family: Open Sans;
+    line-height: 1.42857;
+    background: #c9cdcf;
+}
+
+.nav-link{
+    color: #000000;
+}
+
+.nav-link:hover{
+    color: #000000;
+}
+
+.btn-primary{
+    background-color: #63e08d;
+    color: #000000;
+    border-color: #00883d;
+}
+
+.btn-primary:hover{
+    background-color: #00ca5b;
+    color: #000000;
+    border-color: #00883d;
+}
+
+#link-cadastro{
+    color: #63e08d;
+}
+
+#card-header{
+    background: #63e08d;
+}

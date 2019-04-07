@@ -5,7 +5,7 @@ const db = require('../../dao/login.dao');
 const bcrypt = require('bcryptjs');
 
 const getLogin = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../src/public/login.html'));
+    res.sendFile(path.join(__dirname, '../../../dist/index.html'));
 };
 
 const loginAluno = (req, res) => {

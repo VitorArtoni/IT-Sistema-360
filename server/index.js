@@ -4,13 +4,13 @@ const configureApp = app => {
     const express = require('express');
     const session = require('express-session');
     const bodyParser = require('body-parser');
+    const path = require('path');
 
     require('dotenv').config({
         silent: true
     });
-
-    app.use('/', express.static('src'));
-    app.use(express.static('src'));
+    
+    app.use(express.static(path.join("dist")));
     app.use(bodyParser.urlencoded({
         extended: true
     }));
