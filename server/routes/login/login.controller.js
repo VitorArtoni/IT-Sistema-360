@@ -18,16 +18,19 @@ const loginAluno = (req, res) => {
                 if (result.length > 0) {        
                     if (bcrypt.compareSync(password, result[0].Senha)) {
                         req.session.userId = result[0].RA;
-                        res.redirect('/home');
+                        //res.redirect('/home');
+                        res.send('authorized');
                     }
                     else{
                         console.log('Senha inválida');
-                        res.redirect('/login');
+                        //res.redirect('/login');
+                        res.send('unauthorized');
                     }
                 }
                 else {
                     console.log('Usuário inexistente!');
-                    res.redirect('/login');
+                    //res.redirect('/login');
+                    res.send('user does not exist');
                 }
             })
             .catch(err => {
@@ -36,7 +39,8 @@ const loginAluno = (req, res) => {
     }
     else {
         console.log('Por favor digite seu RA e senha');
-        res.redirect('/login');
+        //res.redirect('/login');
+        res.send('please send any data');
     }
 };
 
