@@ -4,13 +4,14 @@
   "description": "IT Sistema 360",
   "main": "index",
   "scripts": {
-    "dev": "nodemon app.js && ng build --watch",
+    "dev": "nodemon app.js",
     "ng": "ng",
     "start": "concurrently \"ng serve --proxy-config proxy.conf.json\" \"nodemon app.js\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "serve": "ng serve --proxy-config proxy.conf.json"
   },
   "repository": {
     "type": "git",

@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
+import { LoginService } from './login.service';
 
-import { AppRoutingModule } from './app-routing.module';
+import { routes } from './app.routes';
+import { LoginGuard } from './login.guard';
 
 @NgModule({
   declarations: [
@@ -18,10 +20,13 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    routes
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    LoginGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

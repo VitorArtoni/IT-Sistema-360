@@ -18,7 +18,7 @@ module.exports = (middlewares) => {
         middlewares.forEach(middleware => router.use(middleware));
     }
 
-    router.get('/', redirectHome, controller.getLogin);
+    //router.get('/', redirectHome, controller.getLogin);
     router.post('/aluno', redirectHome, controller.loginAluno);
     router.post('/professor', redirectHome, controller.loginProfessor);
 

@@ -9,28 +9,30 @@ const getLogin = (req, res) => {
 };
 
 const loginAluno = (req, res) => {
+    console.log(req.body);
+    
     const ra = parseInt(req.body.ra);
-    const password = req.body.password;
+    const senha = req.body.senha;
 
-    if (ra && password) {
+    if (ra && senha) {
         db.loginAluno(req.body)
             .then(result => {
                 if (result.length > 0) {        
-                    if (bcrypt.compareSync(password, result[0].Senha)) {
+                    if (bcrypt.compareSync(senha, result[0].Senha)) {
                         req.session.userId = result[0].RA;
                         //res.redirect('/home');
-                        res.send('authorized');
+                        res.send('Autorizado');
                     }
                     else{
                         console.log('Senha inválida');
                         //res.redirect('/login');
-                        res.send('unauthorized');
+                        res.send('Não Autorizado');
                     }
                 }
                 else {
                     console.log('Usuário inexistente!');
                     //res.redirect('/login');
-                    res.send('user does not exist');
+                    res.send('Usuário Inexistente');
                 }
             })
             .catch(err => {
@@ -40,7 +42,7 @@ const loginAluno = (req, res) => {
     else {
         console.log('Por favor digite seu RA e senha');
         //res.redirect('/login');
-        res.send('please send any data');
+        res.send('Digite alguma coisa');
     }
 };
 

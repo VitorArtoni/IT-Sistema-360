@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from './login.service';
+import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,24 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
-  ngOnInit() {
-    this.loginService.login().subscribe((res) => {
-      console.log('response from post data is ', res);
-    }, (err) => {
-      console.log('error during post: ', err);
-    })
+  ngOnInit() { }
+
+  loginAluno(event) {
+    event.preventDefault();
+    const target = event.target;
+    const ra = target.querySelector('#ra').value;
+    const senha = target.querySelector('#password').value;
+
+    this.loginService.loginAluno(ra, senha).subscribe(data => {
+      if (data.success) {
+        this.router.navigate(['/home']);
+        this.loginService.setLoginState(true);
+      }
+      else {
+        window.alert('Credenciais incorretas');
+      }
+    });
   }
 }

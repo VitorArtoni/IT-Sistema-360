@@ -10,7 +10,7 @@ const configureApp = app => {
         silent: true
     });
     
-    app.use(express.static(path.join("dist")));
+    //app.use(express.static(path.join("dist")));
     app.use(bodyParser.urlencoded({
         extended: true
     }));
