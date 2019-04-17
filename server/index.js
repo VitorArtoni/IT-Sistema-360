@@ -9,7 +9,7 @@ const configureApp = app => {
     require('dotenv').config({
         silent: true
     });
-    
+
     //app.use(express.static(path.join("dist")));
     app.use(bodyParser.urlencoded({
         extended: true
@@ -63,10 +63,12 @@ const initRoutes = app => {
     const home = require('./routes/home');
     const login = require('./routes/login');
     const cadastro = require('./routes/cadastro');
+    const turmas = require('./routes/turmas');
 
     app.use('/home', home());
     app.use('/login', login());
     app.use('/cadastro', cadastro());
+    app.use('/turmas', turmas());
 };
 
 const startApp = app => {
