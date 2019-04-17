@@ -23,6 +23,11 @@
               <div>
                 <input class="mt-2 col-11" name="senha" type="password" value="" placeholder="Digite sua senha" required />
               </div>
+              <div>
+                <select class="mt-2 col-8" id="select-turma">
+                  <option *ngFor="let turma of Turmas">{{turma}}</option>
+                </select>
+              </div>
               <div class="row mt-4 col-6">
                 <input class="ml-1 btn btn-primary" type="submit" value="Cadastrar" method="post"/>
               </div>
