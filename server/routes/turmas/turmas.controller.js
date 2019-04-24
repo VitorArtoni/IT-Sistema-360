@@ -13,6 +13,29 @@ const getTurmas = (req, res) => {
         })
 }
 
+const criarTurma = (req, res) => {
+    if (req.body.idTurma
+        && req.body.disciplina
+        && req.body.semestre
+        && req.body.ano) {
+        db.criarTurma(req.body)
+            .then(result => {
+                if (result.affectedRows > 0) {
+                    console.log('Turma criada com sucesso');
+                    res.send('Turma criada com sucesso');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.send(err);
+            })
+    }
+    else {
+        res.send('Forneça dados');
+    }
+}
+
 module.exports = {
-    getTurmas
+    getTurmas,
+    criarTurma
 }

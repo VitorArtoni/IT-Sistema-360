@@ -12,6 +12,7 @@ module.exports = (middlewares) => {
     }
 
     router.get('/', controller.getTurmas);
+    router.post('/', controller.criarTurma);
 
     return router;
 }
