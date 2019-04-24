@@ -41,10 +41,7 @@ const criarGrupo = (req, res) => {
             })
             .catch(err => {
                 console.log(err);
-                if (err.code === 'ER_DUP_ENTRY') {
-                    console.log('Já existe um grupo com este nome');
-                    res.send('Já existe um grupo com este nome');
-                }
+                res.send(err);
             });
     }
     else{

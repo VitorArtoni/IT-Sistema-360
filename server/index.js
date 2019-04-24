@@ -65,12 +65,14 @@ const initRoutes = app => {
     const cadastro = require('./routes/cadastro');
     const turmas = require('./routes/turmas');
     const grupo = require('./routes/grupo');
+    const aula = require('./routes/aula');
 
     app.use('/home', home());
     app.use('/login', login());
     app.use('/cadastro', cadastro());
     app.use('/turmas', turmas());
     app.use('/grupo', grupo());
+    app.use('/aula', aula());
 };
 
 const startApp = app => {
