@@ -55,7 +55,7 @@ const configureApp = app => {
     app.use(allowCrossDomain);
 
     app.get('/', (req, res) => {
-        res.redirect('/home');
+        res.send('Hello world');
     });
 };
 
@@ -64,11 +64,13 @@ const initRoutes = app => {
     const login = require('./routes/login');
     const cadastro = require('./routes/cadastro');
     const turmas = require('./routes/turmas');
+    const grupo = require('./routes/grupo');
 
     app.use('/home', home());
     app.use('/login', login());
     app.use('/cadastro', cadastro());
     app.use('/turmas', turmas());
+    app.use('/grupo', grupo());
 };
 
 const startApp = app => {

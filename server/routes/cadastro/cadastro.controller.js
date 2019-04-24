@@ -28,6 +28,9 @@ const cadastroAluno = (req, res) => {
                 res.redirect('/cadastro');
             });
     }
+    else{
+        res.send('Forneça dados');
+    }
 }
 
 const cadastroProfessor = (req, res) => {
