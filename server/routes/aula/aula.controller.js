@@ -3,8 +3,8 @@
 const db = require('../../dao/aula.dao');
 
 const getDataDaAula = (req, res) => {
-    if (req.params.idturma) {
-        db.getDataDaAula(req.params.idturma)
+    if (req.params.idTurma) {
+        db.getDataDaAula(req.params.idTurma)
             .then(result => {
                 res.send(result);
             })

@@ -17,18 +17,18 @@ const cadastroAluno = (req, res) => {
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Usuário cadastrado com sucesso');
-                    res.redirect('/login');
+                    res.send('Aluno criado');
                 }
             })
             .catch(err => {
                 console.log(err);
-                if (err.code === 'ER_DUP_ENTRY')
+                if (err.code === 'ER_DUP_ENTRY') {
                     console.log('Este RA já foi cadastrado');
-
-                res.redirect('/cadastro');
+                    res.send('Este RA ja foi cadastrado');
+                }
             });
     }
-    else{
+    else {
         res.send('Forneça dados');
     }
 }
@@ -39,14 +39,15 @@ const cadastroProfessor = (req, res) => {
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Professor cadastrado com sucesso');
-                    res.redirect('/login');
+                    res.send('Professor cadastrado com sucesso');
                 }
             })
             .catch(err => {
                 console.log(err);
-                if (err.code === 'ER_DUP_ENTRY')
+                if (err.code === 'ER_DUP_ENTRY') {
                     console.log('Esta matrícula já foi cadastrada');
-                res.redirect('/cadastro/professor');
+                    res.send('Esta matrícula já foi cadastrada');
+                }
             });
     }
 }
