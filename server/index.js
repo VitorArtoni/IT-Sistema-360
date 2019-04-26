@@ -61,15 +61,17 @@ const configureApp = app => {
 
 const initRoutes = app => {
     const home = require('./routes/home');
+    const aluno = require('./routes/aluno');
+    const professor = require('./routes/professor');
     const login = require('./routes/login');
-    const cadastro = require('./routes/cadastro');
     const turmas = require('./routes/turmas');
     const grupo = require('./routes/grupo');
     const aula = require('./routes/aula');
 
     app.use('/home', home());
+    app.use('/aluno', aluno());
+    app.use('/professor', professor());
     app.use('/login', login());
-    app.use('/cadastro', cadastro());
     app.use('/turmas', turmas());
     app.use('/grupo', grupo());
     app.use('/aula', aula());
