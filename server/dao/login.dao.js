@@ -7,7 +7,10 @@ const loginProfessor = async function (req, res) {
         .then(results => {
             return results;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            return err;
+        });
 };
 
 const loginAluno = async function (req, res) {
@@ -17,7 +20,10 @@ const loginAluno = async function (req, res) {
         .then(results => {
             return results;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            return err;
+        });
 };
 
 module.exports = {

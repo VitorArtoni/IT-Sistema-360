@@ -6,34 +6,38 @@ const getDataDaAula = (req, res) => {
     if (req.params.idTurma) {
         db.getDataDaAula(req.params.idTurma)
             .then(result => {
-                res.send(result);
+                if (result.length > 0)
+                    res.send(result);
+                else
+                    res.send('Turma fornecida não existe');
             })
             .catch(err => {
-                res.send(err);
+                res.status(500).send(err);
             })
-    } 
-    else {
-        res.send('Envie o id da turma')
     }
+    else
+        res.status(400).send('Envie o id da turma');
 }
 
-const criarAula = (req,res) => {
-    if (req.body.idTurma && req.body.data){
+const criarAula = (req, res) => {
+    if (req.body.idTurma && req.body.data) {
         db.criarAula(req.body)
             .then(result => {
-                if (result.affectedRows > 0){
+                if (result != 'turma_nao_existe') {
                     console.log('Aula criada com sucesso');
                     res.send('Aula criada com sucesso');
+                }
+                else{
+                    res.status(500).send('A turma fornecida não existe');
                 }
             })
             .catch(err => {
                 console.log(err);
-                res.send(err);
+                res.status(500).send(err);
             });
     }
-    else{
-        res.send('Forneça dados');
-    }
+    else
+        res.status(400).send('Por favor forneça o id da turma e data da aula');
 }
 
 module.exports = {

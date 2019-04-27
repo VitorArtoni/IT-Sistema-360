@@ -19,8 +19,8 @@ module.exports = (middlewares) => {
     }
 
     //router.get('/', redirectHome, controller.getLogin);
-    router.post('/aluno', redirectHome, controller.loginAluno);
-    router.post('/professor', redirectHome, controller.loginProfessor);
+    router.post('/aluno', controller.loginAluno);
+    router.post('/professor', controller.loginProfessor);
 
     return router;
 }

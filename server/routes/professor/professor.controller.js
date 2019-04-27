@@ -9,11 +9,11 @@ const buscarProfessor = (req, res) => {
                 res.send(result);
             })
             .catch(err => {
-                res.send(err);
+                res.status(500).send(err);
             })
     }
     else
-        res.send('Envie uma matricula');
+        res.status(400).send('Envie uma matricula');
 }
 
 const cadastrarProfessor = (req, res) => {
@@ -26,13 +26,15 @@ const cadastrarProfessor = (req, res) => {
                 }
             })
             .catch(err => {
-                console.log(err);
                 if (err.code === 'ER_DUP_ENTRY') {
-                    console.log('Esta matrícula já foi cadastrada');
-                    res.send('Esta matrícula já foi cadastrada');
+                    res.status(500).send('Esta matrícula já foi cadastrada');
                 }
+                else
+                    res.status(500).send(err);
             });
     }
+    else
+        res.status(400).send('Por favor informe nome, matricula, senha e tipo de permissao');
 }
 
 module.exports = {

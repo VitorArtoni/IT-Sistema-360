@@ -2,7 +2,7 @@ const connection = require('../database');
 const hash = require('../service/hashing');
 
 const getAlunoByRa = async (req, res) => {
-    let ra = parseInt(req);
+    const ra = parseInt(req);
 
     return await connection.query('SELECT RA,Nome FROM aluno WHERE ra = ?', [ra])
         .then(results => {
@@ -21,12 +21,11 @@ const cadastroAluno = async (req, res) => {
 
     return await connection.query('INSERT INTO aluno (RA, Nome, Senha) VALUES (?,?,?)', [ra, nome, senha])
         .then(result => {
-            console.log(result);
             return result;
         })
         .catch(err => {
             console.log(err);
-            return next();
+            return err;
         });
 }
 

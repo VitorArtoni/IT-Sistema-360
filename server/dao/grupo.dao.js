@@ -15,7 +15,6 @@ const getGrupoById = async function (req, res) {
 
 const getGrupoByNome = async function (req, res) {
     let nome = req;
-    console.log(nome);
 
     return await connection.query('SELECT * FROM grupo WHERE NomeGrupo = ?', [nome])
         .then(results => {

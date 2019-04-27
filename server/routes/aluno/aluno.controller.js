@@ -9,11 +9,11 @@ const buscarAluno = (req,res) => {
                 res.send(result);
             })
             .catch(err => {
-                res.send(err);
+                res.status(500).send(err);
             })
     }
     else
-        res.send('Envie um RA');
+        res.status(400).send('Envie um RA');
 }
 
 const cadastrarAluno = (req, res) => {
@@ -24,18 +24,19 @@ const cadastrarAluno = (req, res) => {
                     console.log('Usuário cadastrado com sucesso');
                     res.send('Aluno criado');
                 }
+                else{
+                    if (result.code === 'ER_DUP_ENTRY')
+                        res.status(500).send('Este RA já foi cadastrado');
+                    else
+                        res.status(500).send('Não foi possível cadastrar o aluno ', err);
+                }
             })
             .catch(err => {
-                console.log(err);
-                if (err.code === 'ER_DUP_ENTRY') {
-                    console.log('Este RA já foi cadastrado');
-                    res.send('Este RA já foi cadastrado');
-                }
+                res.status(500).send(err);
             });
     }
-    else {
-        res.send('Forneça dados');
-    }
+    else
+        res.status(400).send('Forneça dados');
 }
 
 module.exports = {

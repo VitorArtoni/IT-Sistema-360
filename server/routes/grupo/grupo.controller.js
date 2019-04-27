@@ -9,11 +9,11 @@ const getGrupoById = (req, res) => {
                 res.send(result);
             })
             .catch(err => {
-                res.send(err);
+                res.status(500).send(err);
             })
     }
     else
-        res.send('Envie um id');
+        res.status(400).send('Envie o id do grupo');
 }
 
 const getGrupoByNome = (req, res) => {
@@ -23,11 +23,12 @@ const getGrupoByNome = (req, res) => {
                 res.send(result);
             })
             .catch(err => {
-                res.send(err);
+                console.log(err);
+                res.status(500).send(err);
             })
     }
     else
-        res.send('Envie um nome');
+        res.status(400).send('Envie um nome');
 }
 
 const criarGrupo = (req, res) => {    
@@ -38,15 +39,17 @@ const criarGrupo = (req, res) => {
                     console.log('Grupo criado com sucesso');
                     res.send('Grupo ' + req.body.nome + ' criado');
                 }
+                else {
+                    res.status(500).send('Não foi possível criar o grupo')
+                }
             })
             .catch(err => {
                 console.log(err);
-                res.send(err);
+                res.status(500).send(err);
             });
     }
-    else{
-        res.send('Forneça dados');
-    }
+    else
+        res.status(400).send('Forneça dados');
 }
 
 module.exports = {

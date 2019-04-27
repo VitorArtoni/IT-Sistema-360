@@ -8,16 +8,13 @@ const getTurmas = (req, res) => {
             res.send(result);
         })
         .catch(err => {
-            console.log(err);
-            res.send(null);
+            res.status(500).send(err);
         })
 }
 
 const criarTurma = (req, res) => {
-    if (req.body.idTurma
-        && req.body.disciplina
-        && req.body.semestre
-        && req.body.ano) {
+    if (req.body.idTurma && req.body.disciplina
+        && req.body.semestre && req.body.ano) {
         db.criarTurma(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
@@ -26,12 +23,11 @@ const criarTurma = (req, res) => {
                 }
             })
             .catch(err => {
-                console.log(err);
-                res.send(err);
+                res.status(500).send(err);
             })
     }
     else {
-        res.send('Forneça dados');
+        res.status(400).send('Por favor forneça o id da turma, nome da disciplina, semestre e ano da turma');
     }
 }
 

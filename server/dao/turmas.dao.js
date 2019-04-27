@@ -5,7 +5,10 @@ const getTurmas = async function(req,res){
         .then(results => {
             return results;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            return err;
+        });
 }
 
 const criarTurma = async function(req,res){
@@ -19,6 +22,7 @@ const criarTurma = async function(req,res){
             return results;
         })
         .catch(err => {
+            console.log(err);
             return err;
         });
 }
