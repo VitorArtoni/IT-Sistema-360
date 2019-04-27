@@ -3,7 +3,17 @@
 const db = require('../../dao/professor.dao');
 
 const buscarProfessor = (req, res) => {
-    return null;
+    if (req.params.matricula) {
+        db.getProfessorByMatricula(req.params.matricula)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(err => {
+                res.send(err);
+            })
+    }
+    else
+        res.send('Envie uma matricula');
 }
 
 const cadastrarProfessor = (req, res) => {

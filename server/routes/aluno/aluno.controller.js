@@ -3,7 +3,17 @@
 const db = require('../../dao/aluno.dao');
 
 const buscarAluno = (req,res) => {
-    return null;
+    if (req.params.ra) {
+        db.getAlunoByRa(req.params.ra)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(err => {
+                res.send(err);
+            })
+    }
+    else
+        res.send('Envie um RA');
 }
 
 const cadastrarAluno = (req, res) => {

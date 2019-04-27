@@ -11,7 +11,7 @@ module.exports = (middlewares) => {
         middlewares.forEach(middleware => router.use(middleware));
     }
 
-    router.get('/aluno/:ra', controller.buscarAluno);
+    router.get('/:ra', controller.buscarAluno);
     router.post('/', controller.cadastrarAluno);
 
     return router;

@@ -11,7 +11,7 @@ module.exports = (middlewares) => {
         middlewares.forEach(middleware => router.use(middleware));
     }
 
-    router.get('/professor/:matricula', controller.buscarProfessor);
+    router.get('/:matricula', controller.buscarProfessor);
     router.post('/', controller.cadastrarProfessor);
 
     return router;
