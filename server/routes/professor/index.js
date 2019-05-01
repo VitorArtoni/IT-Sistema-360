@@ -13,6 +13,7 @@ module.exports = (middlewares) => {
 
     router.get('/:matricula', controller.buscarProfessor);
     router.post('/', controller.cadastrarProfessor);
+    router.post('/turma', controller.atribuirTurmaAProfessor);
 
     return router;
 }

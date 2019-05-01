@@ -37,7 +37,29 @@ const cadastrarProfessor = (req, res) => {
         res.status(400).send('Por favor informe nome, matricula, senha e tipo de permissao');
 }
 
+const atribuirTurmaAProfessor = (req, res) => {
+    if (req.body.matricula && req.body.idTurma) {
+        db.atribuirTurmaAProfessor(req.body)
+            .then(result => {
+                if (parseInt(result.affectedRows) > 0) {
+                    console.log('Professor atribuído a turma ' + req.body.idTurma);
+                    res.send('Professor atribuído a turma ' + req.body.idTurma);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                if (err.code === 'ER_DUP_ENTRY')
+                    res.status(500).send('Este professor já foi atribuído a esta turma');
+                else
+                    res.status(500).send(err);
+            });
+    }
+    else
+        res.status(400).send('Por favor informe a matrícula e id da turma');
+}
+
 module.exports = {
     buscarProfessor,
-    cadastrarProfessor
+    cadastrarProfessor,
+    atribuirTurmaAProfessor
 }
