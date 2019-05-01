@@ -13,6 +13,7 @@ module.exports = (middlewares) => {
 
     router.get('/:ra', controller.buscarAluno);
     router.post('/', controller.cadastrarAluno);
+    router.post('/turma', controller.atribuirAlunoATurma);
 
     return router;
 }

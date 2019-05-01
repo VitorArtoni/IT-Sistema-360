@@ -10,7 +10,7 @@ const getAlunoByRa = async (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            return err;
+            throw err;
         });
 }
 
@@ -25,11 +25,27 @@ const cadastroAluno = async (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            return err;
+            throw err;
         });
+}
+
+const atribuirAlunoATurma = async (req, res) => {
+    const idTurma = req.idTurma;
+    const idGrupo = req.idGrupo ? parseInt(req.idGrupo) : null;
+    const RA = parseInt(req.RA);
+
+    return await connection.query('INSERT INTO aluno_turma (idTurma, idGrupo, RA) VALUES (?,?,?)', [idTurma, idGrupo, RA])
+        .then(result => {
+            return result;
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        })
 }
 
 module.exports = {
     getAlunoByRa,
-    cadastroAluno
+    cadastroAluno,
+    atribuirAlunoATurma
 }
