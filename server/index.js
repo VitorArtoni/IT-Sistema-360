@@ -5,12 +5,34 @@ const configureApp = app => {
     const session = require('express-session');
     const bodyParser = require('body-parser');
     const path = require('path');
+    const swaggerJSDoc = require('swagger-jsdoc');
 
     require('dotenv').config({
         silent: true
     });
 
-    //app.use(express.static(path.join("dist")));
+    const swaggerDefinition = {
+        info: {
+            title: 'Sistema360 API',
+            version: '1.0.0',
+        },
+        host: 'localhost:' + process.env.port,
+        basePath: '/'
+    };
+
+    const swaggerOptions = {
+        swaggerDefinition: swaggerDefinition,
+        apis: ['./routes/*.js']
+    };
+
+    const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+    app.get('/swagger.json', (req,res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(swaggerSpec);
+    });
+
+    app.use('/swagger', express.static('api-docs'));
     app.use(bodyParser.urlencoded({
         extended: true
     }));
