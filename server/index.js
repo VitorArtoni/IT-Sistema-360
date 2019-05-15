@@ -5,31 +5,9 @@ const configureApp = app => {
     const session = require('express-session');
     const bodyParser = require('body-parser');
     const path = require('path');
-    const swaggerJSDoc = require('swagger-jsdoc');
 
     require('dotenv').config({
         silent: true
-    });
-
-    const swaggerDefinition = {
-        info: {
-            title: 'Sistema360 API',
-            version: '1.0.0',
-        },
-        host: 'localhost:' + process.env.port,
-        basePath: '/'
-    };
-
-    const swaggerOptions = {
-        swaggerDefinition: swaggerDefinition,
-        apis: ['./routes/*.js']
-    };
-
-    const swaggerSpec = swaggerJSDoc(swaggerOptions);
-
-    app.get('/swagger.json', (req,res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(swaggerSpec);
     });
 
     app.use('/swagger', express.static('api-docs'));
@@ -81,6 +59,31 @@ const configureApp = app => {
     });
 };
 
+const configSwagger = app => {
+    const swaggerJSDoc = require('swagger-jsdoc');
+
+    const swaggerDefinition = {
+        info: {
+            title: 'Sistema360 API',
+            version: '1.0.0'
+        },
+        host: 'localhost:' + process.env.port,
+        basePath: '/'
+    };
+
+    const options = {
+        swaggerDefinition: swaggerDefinition,
+        apis: ['./server/routes/**/*.js']
+    };
+
+    const swaggerSpec = swaggerJSDoc(options);
+
+    app.get('/swagger.json', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(swaggerSpec);
+    });
+}
+
 const initRoutes = app => {
     const home = require('./routes/home');
     const aluno = require('./routes/aluno');
@@ -109,6 +112,7 @@ const startApp = app => {
 
 const init = app => {
     configureApp(app);
+    configSwagger(app);
     initRoutes(app);
     startApp(app);
 };
