@@ -32,9 +32,9 @@ const cadastroAluno = async (req, res) => {
 const atribuirAlunoATurma = async (req, res) => {
     const idTurma = req.idTurma;
     const idGrupo = req.idGrupo ? parseInt(req.idGrupo) : null;
-    const RA = parseInt(req.RA);
+    const ra = parseInt(req.ra);
 
-    return await connection.query('INSERT INTO aluno_turma (idTurma, idGrupo, RA) VALUES (?,?,?)', [idTurma, idGrupo, RA])
+    return await connection.query('INSERT INTO aluno_turma (idTurma, idGrupo, Aluno_RA) VALUES (?,?,?)', [idTurma, idGrupo, ra])
         .then(result => {
             return result;
         })

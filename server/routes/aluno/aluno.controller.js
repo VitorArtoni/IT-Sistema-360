@@ -40,7 +40,7 @@ const cadastrarAluno = (req, res) => {
 }
 
 const atribuirAlunoATurma = (req, res) => {
-    if (req.body.idTurma && req.body.RA) {
+    if (req.body.idTurma && req.body.ra) {
         db.atribuirAlunoATurma(req.body)
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
