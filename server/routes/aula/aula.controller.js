@@ -9,7 +9,7 @@ const getDataDaAula = (req, res) => {
                 if (result.length > 0)
                     res.send(result);
                 else
-                    res.send('Turma fornecida não existe');
+                    res.send('Nenhum resultado encontrado');
             })
             .catch(err => {
                 res.status(500).send(err);
