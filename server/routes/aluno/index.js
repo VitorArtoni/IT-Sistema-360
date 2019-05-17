@@ -17,7 +17,7 @@ module.exports = (middlewares) => {
      *  get:
      *    tags:
      *      - Aluno
-     *    description: Retorna aluno de acordo com o RA
+     *    description: Retorna informações do Aluno(exceto a senha) de acordo com o RA
      *    produces:
      *      - application/json
      *    parameters:
@@ -28,7 +28,7 @@ module.exports = (middlewares) => {
      *        type: integer
      *    responses:
      *      200:
-     *        description: Foi possível retornar o aluno
+     *        description: Dados do aluno
      *      400:
      *        description: Necessário enviar um RA como parâmetro
      *      500:
