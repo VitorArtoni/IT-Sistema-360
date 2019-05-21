@@ -92,6 +92,7 @@ const initRoutes = app => {
     const turmas = require('./routes/turmas');
     const grupo = require('./routes/grupo');
     const aula = require('./routes/aula');
+    const topico = require('./routes/topico');
 
     app.use('/home', home());
     app.use('/aluno', aluno());
@@ -100,6 +101,7 @@ const initRoutes = app => {
     app.use('/turmas', turmas());
     app.use('/grupo', grupo());
     app.use('/aula', aula());
+    app.use('/topico', topico());
 };
 
 const startApp = app => {
