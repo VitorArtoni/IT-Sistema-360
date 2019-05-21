@@ -1,9 +1,9 @@
 const connection = require('../database');
 
-const getObjetoByNome = async function (req, res) {
+const getRequisitoByNome = async function (req, res) {
     let nome = req;
 
-    return await connection.query('SELECT * FROM objetos_de_avaliacao WHERE Nome_objeto LIKE ?', ['%' + nome + '%'])
+    return await connection.query('SELECT * FROM requisitos_de_avaliacao WHERE Nome_requisito LIKE ?', ['%' + nome + '%'])
         .then(results => {
             return results;
         })
@@ -14,10 +14,10 @@ const getObjetoByNome = async function (req, res) {
 }
 
 
-const criarObjeto = async function (req, res) {
+const criarRequisito = async function (req, res) {
     let nome = req.nome;
 
-    return await connection.query('INSERT INTO objetos_de_avaliacao (idObjetos_de_avaliacao	, Nome_objeto) VALUES (?,?)', [null, nome])
+    return await connection.query('INSERT INTO requisitos_de_avaliacao (idRequisitos_de_avaliacao, Nome_requisito) VALUES (?,?)', [null, nome])
         .then(result => {
             return result;
         })
@@ -28,6 +28,6 @@ const criarObjeto = async function (req, res) {
 }
 
 module.exports = {
-    getObjetoByNome,
-    criarObjeto
+    getRequisitoByNome,
+    criarRequisito
 }
