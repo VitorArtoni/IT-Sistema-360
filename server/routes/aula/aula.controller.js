@@ -27,7 +27,7 @@ const criarAula = (req, res) => {
                     console.log('Aula criada com sucesso');
                     res.send('Aula criada com sucesso');
                 }
-                else{
+                else {
                     res.status(500).send('A turma fornecida não existe');
                 }
             })
@@ -40,7 +40,29 @@ const criarAula = (req, res) => {
         res.status(400).send('Por favor forneça o id da turma e data da aula');
 }
 
+const marcarPresenca = (req, res) => {
+    if (req.body.ra && req.body.idTurma && req.body.idAula && req.body.presenca) {
+        db.marcarPresenca(req.body)
+            .then(result => {
+                if (parseInt(result.affectedRows) > 0) {
+                    console.log('Presença marcada com sucesso');
+                    res.send('Presença marcada com sucesso');
+                }
+                else {
+                    res.status(500).send('Não foi possível marcar a presença');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).send(err);
+            });
+    }
+    else
+        res.status(400).send('Por favor forneça ra, id da turma, id da aula e a presença do aluno');
+}
+
 module.exports = {
     getDataDaAula,
-    criarAula
+    criarAula,
+    marcarPresenca
 }

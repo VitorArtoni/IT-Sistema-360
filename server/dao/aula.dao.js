@@ -34,7 +34,24 @@ const criarAula = async function (req, res) {
         })
 }
 
+const marcarPresenca = async function (req, res) {
+    const ra = req.ra;
+    const idTurma = req.idTurma;
+    const idAula = parseInt(req.idAula);
+    const presenca = parseFloat(req.presenca);
+
+    return await connection.query('INSERT INTO aluno_presente_aula (RA,Turma,idAula,Presenca) VALUES (?,?,?,?)', [ra,idTurma,idAula,presenca])
+        .then(result => {
+            return result;
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        })
+}
+
 module.exports = {
     getDataDaAula,
-    criarAula
+    criarAula,
+    marcarPresenca
 }

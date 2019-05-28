@@ -71,5 +71,48 @@ module.exports = (middlewares) => {
      */    
     router.post('/', controller.criarAula);
 
+    /**
+     * @swagger
+     * /aula/presenca:
+     *   post:
+     *     tags:
+     *       - Aula
+     *     description: Marca presença para um aluno
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: body
+     *         name: JSON contendo RA, idTurma, idAula e presenca
+     *         required: true
+     *         schema:
+     *           type: object
+     *           required:
+     *             - RA
+     *             - idTurma
+     *             - idAula
+     *             - presenca
+     *           properties:
+     *             ra:
+     *               type: string
+     *               example: 123456
+     *             idTurma:
+     *               type: string
+     *               example: SI250A
+     *             idAula:
+     *               type: integer
+     *               example: 1
+     *             presenca:
+     *               type: float
+     *               example: 0.8
+     *     responses:
+     *       200:
+     *          description: Presenca marcada
+     *       400:
+     *          description: Necessário enviar todos os dados obrigatórios
+     *       500:
+     *          description: Erro inesperado
+     */ 
+    router.post('/presenca', controller.marcarPresenca);
+
     return router;
 }
