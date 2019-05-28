@@ -110,5 +110,44 @@ module.exports = (middlewares) => {
      */    
     router.post('/turma', controller.atribuirAlunoATurma);
 
+    /**
+     * @swagger
+     * /aluno/grupo:
+     *   post:
+     *     tags:
+     *       - Aluno
+     *     description: Alocar um aluno em um grupo
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: body
+     *         name: JSON contendo RA, id da turma e id do grupo
+     *         required: true
+     *         schema:
+     *           type: object
+     *           required:
+     *             - ra
+     *             - idTurma
+     *             - idGrupo
+     *           properties:
+     *             ra:
+     *               type: integer
+     *               example: 123456
+     *             idTurma:
+     *               type: string
+     *               example: SI250A
+     *             idGrupo:
+     *               type: integer
+     *               example: 1
+     *     responses:
+     *       200:
+     *          description: Aluno foi atribuido à turma
+     *       400:
+     *          description: Necessário enviar todos os dados obrigatórios
+     *       500:
+     *          description: Erro inesperado
+     */   
+    router.post('/grupo', controller.alocarAlunoEmGrupo);
+
     return router;
 }

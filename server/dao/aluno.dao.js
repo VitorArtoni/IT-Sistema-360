@@ -44,8 +44,24 @@ const atribuirAlunoATurma = async (req, res) => {
         })
 }
 
+const alocarAlunoEmGrupo = async (req,res) => {
+    const ra = parseInt(req.ra);
+    const idTurma = req.idTurma;
+    const idGrupo = parseInt(req.idGrupo);
+
+    return await connection.query('UPDATE aluno_turma SET idGrupo = ? WHERE Aluno_RA = ? AND idTurma = ?',[idGrupo,ra,idTurma])
+        .then(result => {
+            return result;
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        })
+}
+
 module.exports = {
     getAlunoByRa,
     cadastroAluno,
-    atribuirAlunoATurma
+    atribuirAlunoATurma,
+    alocarAlunoEmGrupo
 }
