@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Maio-2019 às 23:44
+-- Generation Time: 04-Jun-2019 às 23:40
 -- Versão do servidor: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -103,7 +103,8 @@ CREATE TABLE `aluno_turma` (
 --
 
 INSERT INTO `aluno_turma` (`idTurma`, `Nota`, `Status`, `idGrupo`, `Aluno_RA`) VALUES
-('SI250A', 0, 'Em Andamento', 2, 123456);
+('SI250A', 0, 'Em Andamento', 2, 123456),
+('SI250A', 0, 'Em Andamento', NULL, 178379);
 
 -- --------------------------------------------------------
 
@@ -157,11 +158,19 @@ INSERT INTO `aula` (`idAula`, `idTurma`, `Data`) VALUES
 --
 
 CREATE TABLE `contribuicao` (
+  `idTopico` varchar(10) NOT NULL,
   `RA` int(11) NOT NULL,
   `idTurma` varchar(12) NOT NULL,
-  `Semana_Contribuicao` date NOT NULL,
-  `Tipo_Contribuicao` set('Sala','Blog') NOT NULL
+  `Data` date NOT NULL,
+  `Nota` set('0','0.5','1','1.5','2','2.5','3','3.5','4','4.5','5','5.5','6','6.5','7','7.5','8','8.5','9','9.5','10') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `contribuicao`
+--
+
+INSERT INTO `contribuicao` (`idTopico`, `RA`, `idTurma`, `Data`, `Nota`) VALUES
+('T1A1', 123456, 'SI250A', '2019-06-01', '1.5');
 
 -- --------------------------------------------------------
 
@@ -315,7 +324,7 @@ CREATE TABLE `rodadas_debate` (
   `idRodadaDebate` int(11) NOT NULL,
   `RA` int(11) NOT NULL,
   `idTurma` varchar(12) NOT NULL,
-  `idTopico` int(11) NOT NULL,
+  `idTopico` varchar(10) NOT NULL,
   `Topico` varchar(45) NOT NULL,
   `Data` date NOT NULL,
   `Participacao` int(11) NOT NULL,
@@ -334,7 +343,7 @@ CREATE TABLE `rodadas_debate` (
 --
 
 CREATE TABLE `topico` (
-  `idTopico` int(11) NOT NULL,
+  `idTopico` varchar(10) NOT NULL,
   `nomeTopico` varchar(45) NOT NULL,
   `idTurma` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -344,10 +353,10 @@ CREATE TABLE `topico` (
 --
 
 INSERT INTO `topico` (`idTopico`, `nomeTopico`, `idTurma`) VALUES
-(1, 'A aplicação de juros compostos no dia a dia', 'SI250A'),
-(2, 'Outro topico', 'SI260A'),
-(3, 'Mais um tópico', 'SI250A'),
-(4, 'Novamente mais um tópico', 'SI260A');
+('T1A1', 'A aplicação de juros compostos no dia a dia', 'SI250A'),
+('T1A2', 'Outro topico', 'SI250A'),
+('T1A3', 'Mais um tópico', 'SI250A'),
+('T2A1', 'Novamente mais um tópico', 'SI250A');
 
 -- --------------------------------------------------------
 
@@ -424,7 +433,7 @@ ALTER TABLE `aula`
 -- Indexes for table `contribuicao`
 --
 ALTER TABLE `contribuicao`
-  ADD PRIMARY KEY (`RA`,`idTurma`),
+  ADD PRIMARY KEY (`idTopico`,`RA`,`idTurma`) USING BTREE,
   ADD KEY `fk_Contribuicao_Participacao1_idx` (`RA`,`idTurma`);
 
 --
@@ -537,11 +546,6 @@ ALTER TABLE `requisitos_de_avaliacao`
 ALTER TABLE `rodadas_debate`
   MODIFY `idRodadaDebate` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `topico`
---
-ALTER TABLE `topico`
-  MODIFY `idTopico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
 -- Constraints for dumped tables
 --
 
@@ -584,7 +588,8 @@ ALTER TABLE `aula`
 -- Limitadores para a tabela `contribuicao`
 --
 ALTER TABLE `contribuicao`
-  ADD CONSTRAINT `fk_Contribuicao_Participacao1` FOREIGN KEY (`RA`,`idTurma`) REFERENCES `participacao` (`RA`, `idTurma`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Contribuicao_Participacao1` FOREIGN KEY (`RA`,`idTurma`) REFERENCES `aluno_turma` (`Aluno_RA`, `idTurma`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Contribuicao_Topico1` FOREIGN KEY (`idTopico`) REFERENCES `topico` (`idTopico`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `debate`
@@ -604,7 +609,7 @@ ALTER TABLE `objetos_de_avaliacao_possuem_requisitos_de_avaliacao`
 -- Limitadores para a tabela `participacao`
 --
 ALTER TABLE `participacao`
-  ADD CONSTRAINT `fk_Participacao_Aluno_Presente_Aula1` FOREIGN KEY (`RA`,`idTurma`) REFERENCES `aluno_presente_aula` (`RA`, `Turma`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Participacao_Aluno_Presente_Aula1` FOREIGN KEY (`RA`,`idTurma`) REFERENCES `aluno_turma` (`Aluno_RA`, `idTurma`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `professor_leciona_turma`
