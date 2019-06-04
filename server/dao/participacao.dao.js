@@ -1,13 +1,13 @@
 const connection = require('../database');
 
 const inserirContribuicao = async (req,res) => {
-    const id = req.id;
+    const idTopico = req.idTopico;
     const ra = parseInt(req.ra);
     const idTurma = req.idTurma;
     const data = req.data;
     const nota = parseFloat(req.nota);
 
-    return await connection.query('INSERT INTO contribuicao (id,RA,idTurma,Data,Nota) VALUES (?,?,?,?,?)', [id,ra,idTurma,data,nota])
+    return await connection.query('INSERT INTO contribuicao (idTopico,RA,idTurma,Data,Nota) VALUES (?,?,?,?,?)', [idTopico,ra,idTurma,data,nota])
         .then(results => {
             return results;
         })

@@ -27,13 +27,13 @@ module.exports = (middlewares) => {
      *         schema:
      *           type: object
      *           required:
-     *             - id
+     *             - idTopico
      *             - ra
      *             - idTurma
      *             - data
      *             - nota
      *           properties:
-     *             id:
+     *             idTopico:
      *               type: string
      *               example: T1A1
      *             ra:

@@ -3,7 +3,7 @@
 const db = require('../../dao/participacao.dao');
 
 const inserirContribuicao = (req,res) => {
-    if (req.body.id && req.body.ra && req.body.idTurma
+    if (req.body.idTopico && req.body.ra && req.body.idTurma
         && req.body.data && req.body.nota) {
             db.inserirContribuicao(req.body)
                 .then(result => {
