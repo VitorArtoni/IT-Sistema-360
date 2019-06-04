@@ -95,6 +95,7 @@ const initRoutes = app => {
     const topico = require('./routes/topico');
     const objetosAvaliacao = require('./routes/objetosAvaliacao');
     const requisitosAvaliacao = require('./routes/requisitosAvaliacao');
+    const participacao = require('./routes/participacao');
 
     app.use('/home', home());
     app.use('/aluno', aluno());
@@ -106,6 +107,7 @@ const initRoutes = app => {
     app.use('/topico', topico());
     app.use('/objetos', objetosAvaliacao());
     app.use('/requisitos', requisitosAvaliacao());
+    app.use('/participacao', participacao());
 };
 
 const startApp = app => {
