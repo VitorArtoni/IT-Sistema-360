@@ -4,10 +4,9 @@ const inserirContribuicao = async (req,res) => {
     const idTopico = req.idTopico;
     const ra = parseInt(req.ra);
     const idTurma = req.idTurma;
-    const data = req.data;
-    const nota = parseFloat(req.nota);
+    const nota = req.nota;
 
-    return await connection.query('INSERT INTO contribuicao (idTopico,RA,idTurma,Data,Nota) VALUES (?,?,?,?,?)', [idTopico,ra,idTurma,data,nota])
+    return await connection.query('INSERT INTO contribuicao (idTopico,RA,idTurma,Nota) VALUES (?,?,?,?)', [idTopico,ra,idTurma,nota])
         .then(results => {
             return results;
         })

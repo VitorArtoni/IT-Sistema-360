@@ -31,7 +31,8 @@ const getTopicoByTurma = (req,res) => {
 }
 
 const criarTopico = (req,res) => {
-    if (req.body.nome && req.body.idTurma) {
+    if (req.body.idTopico && req.body.nome 
+            && req.body.idTurma && req.body.data) {
         db.criarTopico(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {

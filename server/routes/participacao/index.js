@@ -30,7 +30,6 @@ module.exports = (middlewares) => {
      *             - idTopico
      *             - ra
      *             - idTurma
-     *             - data
      *             - nota
      *           properties:
      *             idTopico:
@@ -42,9 +41,6 @@ module.exports = (middlewares) => {
      *             idTurma:
      *               type: string
      *               example: SI250A
-     *             data:
-     *               type: string
-     *               example: '2019-06-01'
      *             nota:
      *               type: float
      *               example: 8.5

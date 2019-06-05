@@ -77,15 +77,23 @@ module.exports = (middlewares) => {
      *         schema:
      *           type: object
      *           required:
+     *             - idTopico
      *             - nome
      *             - idTurma
+     *             - data
      *           properties:
+     *             idTopico:
+     *               type: string
+     *               example: T1A1
      *             nome:
      *               type: string
      *               example: A aplicação de juros compostos no dia a dia
      *             idTurma:
      *               type: string
      *               example: SI250A
+     *             data:
+     *               type: string
+     *               example: '2019-02-02'
      *     responses:
      *       200:
      *         description: Tópico criado
