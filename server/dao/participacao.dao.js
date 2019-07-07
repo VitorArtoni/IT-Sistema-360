@@ -34,6 +34,19 @@ const calcularEficiencia = async (req, res) => {
         })
 }
 
+const calcularEficienciaDaTurma = async (req,res) => {
+    const idTurma = req;
+
+    return await connection.query('call calcular_eficiencia(?)', [idTurma])
+        .then(results => {
+            return results;
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        })
+}
+
 const getNotas = async (req,res) => {
     const idTurma = req;
 
@@ -53,5 +66,6 @@ const getNotas = async (req,res) => {
 module.exports = {
     inserirContribuicao,
     calcularEficiencia,
+    calcularEficienciaDaTurma,
     getNotas
 }

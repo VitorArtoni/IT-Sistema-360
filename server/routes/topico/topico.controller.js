@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../../dao/topico.dao');
+const participacao = require('../../dao/participacao.dao');
 
 const getTopicoByName = (req,res) => {
     if (req.params.nome) {
@@ -37,6 +38,8 @@ const criarTopico = (req,res) => {
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Tópico criado com sucesso');
+                    participacao.calcularEficienciaDaTurma(req.body.idTurma);
+                    participacao.getNotas(req.body.idTurma);
                     res.send('Tópico "' + req.body.nome + '" criado');
                 }
                 else {
