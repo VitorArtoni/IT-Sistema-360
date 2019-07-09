@@ -1,14 +1,14 @@
 'use strict'
 
-const db = require('../../dao/participacao.dao');
+const dao = require('../../dao/participacao.dao');
 
 const inserirContribuicao = (req,res) => {
     if (req.body.idTopico && req.body.ra && req.body.idTurma && req.body.nota) {
-            db.inserirContribuicao(req.body)
+            dao.inserirContribuicao(req.body)
                 .then(result => {
                     if (parseInt(result.affectedRows) > 0) {
                         console.log('Contribuição inserida com sucesso');
-                        db.calcularEficiencia(req.body)
+                        dao.calcularEficiencia(req.body)
                         .then(result => {
                             console.log(result);
                         })
@@ -29,7 +29,7 @@ const inserirContribuicao = (req,res) => {
 
 const calcularEficiencia = (req,res) => {
     if (req.body.ra && req.body.idTurma) {
-        db.calcularEficiencia(req.body)
+        dao.calcularEficiencia(req.body)
         .then(result => {
             if (result.affectedRows > 0){
                 res.send('Eficiência calculada com sucesso');
@@ -47,7 +47,7 @@ const calcularEficiencia = (req,res) => {
 
 const calcularMedia = (req,res) => {
     if (req.params.idTurma) {
-        db.getNotas(req.params.idTurma)
+        dao.getNotas(req.params.idTurma)
             .then(result => {
                 res.send(result);
             })

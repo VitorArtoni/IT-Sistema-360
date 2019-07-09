@@ -1,10 +1,10 @@
 'use strict'
 
-const db = require('../../dao/grupo.dao');
+const dao = require('../../dao/grupo.dao');
 
 const getGrupoById = (req, res) => {
     if (req.params.id) {
-        db.getGrupoById(req.params.id)
+        dao.getGrupoById(req.params.id)
             .then(result => {
                 res.send(result);
             })
@@ -18,7 +18,7 @@ const getGrupoById = (req, res) => {
 
 const getGrupoByNome = (req, res) => {
     if (req.params.nome) {
-        db.getGrupoByNome(req.params.nome)
+        dao.getGrupoByNome(req.params.nome)
             .then(result => {
                 res.send(result);
             })
@@ -33,7 +33,7 @@ const getGrupoByNome = (req, res) => {
 
 const criarGrupo = (req, res) => {    
     if (req.body.nome) {
-        db.criarGrupo(req.body)
+        dao.criarGrupo(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Grupo criado com sucesso');

@@ -1,11 +1,11 @@
 'use strict'
 
-const db = require('../../dao/topico.dao');
-const participacao = require('../../dao/participacao.dao');
+const dao = require('../../dao/topico.dao');
+const participacaoDao = require('../../dao/participacao.dao');
 
 const getTopicoByName = (req,res) => {
     if (req.params.nome) {
-        db.getTopicoByName(req.params.nome)
+        dao.getTopicoByName(req.params.nome)
             .then(result => {
                 res.send(result);
             })
@@ -19,7 +19,7 @@ const getTopicoByName = (req,res) => {
 
 const getTopicoByTurma = (req,res) => {
     if (req.params.idTurma) {
-        db.getTopicoByTurma(req.params.idTurma)
+        dao.getTopicoByTurma(req.params.idTurma)
             .then(result => {
                 res.send(result);
             })
@@ -33,7 +33,7 @@ const getTopicoByTurma = (req,res) => {
 
 const getTopicoByObjetivo = (req,res) => {
     if (req.params.objetivo) {
-        db.getTopicoByObjetivo(req.params.objetivo)
+        dao.getTopicoByObjetivo(req.params.objetivo)
             .then(result => {
                 res.send(result);
             })
@@ -48,12 +48,12 @@ const getTopicoByObjetivo = (req,res) => {
 const criarTopico = (req,res) => {
     if (req.body.idTopico && req.body.nome 
             && req.body.idTurma && req.body.data && req.body.objetivo) {
-        db.criarTopico(req.body)
+        dao.criarTopico(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Tópico criado com sucesso');   
-                    participacao.calcularEficienciaDaTurma(req.body.idTurma);
-                    participacao.getNotas(req.body.idTurma);
+                    participacaoDao.calcularEficienciaDaTurma(req.body.idTurma);
+                    participacaoDao.getNotas(req.body.idTurma);
                     res.send('Tópico "' + req.body.nome + '" criado');
                 }
                 else {

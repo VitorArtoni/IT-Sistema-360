@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const db = require('../../dao/login.dao');
+const dao = require('../../dao/login.dao');
 const bcrypt = require('bcryptjs');
 
 const getLogin = (req, res) => {
@@ -13,7 +13,7 @@ const loginAluno = (req, res) => {
     const senha = req.body.senha;
 
     if (ra && senha) {
-        db.loginAluno(req.body)
+        dao.loginAluno(req.body)
             .then(result => {
                 if (result.length > 0) {
                     if (bcrypt.compareSync(senha, result[0].Senha)) {
@@ -47,7 +47,7 @@ const loginProfessor = (req, res) => {
     const senha = req.body.senha;
 
     if (matricula && senha) {
-        db.loginProfessor(req.body)
+        dao.loginProfessor(req.body)
             .then(result => {
                 if (result.length > 0) {
                     if (bcrypt.compareSync(senha, result[0].Senha)) {

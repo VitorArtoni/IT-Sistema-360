@@ -1,10 +1,10 @@
 'use strict'
 
-const db = require('../../dao/aluno.dao');
+const dao = require('../../dao/aluno.dao');
 
 const buscarAluno = (req, res) => {
     if (req.params.ra) {
-        db.getAlunoByRa(req.params.ra)
+        dao.getAlunoByRa(req.params.ra)
             .then(result => {
                 res.send(result);
             })
@@ -18,7 +18,7 @@ const buscarAluno = (req, res) => {
 
 const cadastrarAluno = (req, res) => {
     if (req.body.nome && req.body.ra && req.body.senha) {
-        db.cadastroAluno(req.body)
+        dao.cadastroAluno(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Usuário cadastrado com sucesso');
@@ -41,7 +41,7 @@ const cadastrarAluno = (req, res) => {
 
 const atribuirAlunoATurma = (req, res) => {
     if (req.body.idTurma && req.body.ra) {
-        db.atribuirAlunoATurma(req.body)
+        dao.atribuirAlunoATurma(req.body)
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Aluno atribuído a turma ' + req.body.idTurma);
@@ -59,7 +59,7 @@ const atribuirAlunoATurma = (req, res) => {
 
 const alocarAlunoEmGrupo = (req,res) => {
     if (req.body.ra && req.body.idGrupo && req.body.idTurma) {
-        db.alocarAlunoEmGrupo(req.body)
+        dao.alocarAlunoEmGrupo(req.body)
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Aluno alocado no grupo ' + req.body.idGrupo);

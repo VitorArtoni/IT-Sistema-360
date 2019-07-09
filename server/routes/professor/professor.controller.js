@@ -1,10 +1,10 @@
 'use strict'
 
-const db = require('../../dao/professor.dao');
+const dao = require('../../dao/professor.dao');
 
 const buscarProfessor = (req, res) => {
     if (req.params.matricula) {
-        db.getProfessorByMatricula(req.params.matricula)
+        dao.getProfessorByMatricula(req.params.matricula)
             .then(result => {
                 res.send(result);
             })
@@ -18,7 +18,7 @@ const buscarProfessor = (req, res) => {
 
 const cadastrarProfessor = (req, res) => {
     if (req.body.nome && req.body.matricula && req.body.senha && req.body.permissao) {
-        db.cadastroProfessor(req.body)
+        dao.cadastroProfessor(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Professor cadastrado com sucesso');
@@ -39,7 +39,7 @@ const cadastrarProfessor = (req, res) => {
 
 const atribuirTurmaAProfessor = (req, res) => {
     if (req.body.matricula && req.body.idTurma) {
-        db.atribuirTurmaAProfessor(req.body)
+        dao.atribuirTurmaAProfessor(req.body)
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Professor atribuído a turma ' + req.body.idTurma);

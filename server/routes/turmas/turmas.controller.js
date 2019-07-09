@@ -1,9 +1,9 @@
 'use strict'
 
-const db = require('../../dao/turmas.dao');
+const dao = require('../../dao/turmas.dao');
 
 const getTurmas = (req, res) => {
-    db.getTurmas()
+    dao.getTurmas()
         .then(result => {
             res.send(result);
         })
@@ -15,7 +15,7 @@ const getTurmas = (req, res) => {
 const criarTurma = (req, res) => {
     if (req.body.idTurma && req.body.disciplina
         && req.body.semestre && req.body.ano) {
-        db.criarTurma(req.body)
+        dao.criarTurma(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Turma criada com sucesso');

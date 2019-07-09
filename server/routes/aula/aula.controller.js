@@ -1,10 +1,10 @@
 'use strict'
 
-const db = require('../../dao/aula.dao');
+const dao = require('../../dao/aula.dao');
 
 const getDataDaAula = (req, res) => {
     if (req.params.idTurma) {
-        db.getDataDaAula(req.params.idTurma)
+        dao.getDataDaAula(req.params.idTurma)
             .then(result => {
                 if (result.length > 0)
                     res.send(result);
@@ -21,7 +21,7 @@ const getDataDaAula = (req, res) => {
 
 const criarAula = (req, res) => {
     if (req.body.idTurma && req.body.data) {
-        db.criarAula(req.body)
+        dao.criarAula(req.body)
             .then(result => {
                 if (result != 'turma_nao_existe') {
                     console.log('Aula criada com sucesso');
@@ -42,7 +42,7 @@ const criarAula = (req, res) => {
 
 const marcarPresenca = (req, res) => {
     if (req.body.ra && req.body.idTurma && req.body.idAula && req.body.presenca) {
-        db.marcarPresenca(req.body)
+        dao.marcarPresenca(req.body)
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Presença marcada com sucesso');
