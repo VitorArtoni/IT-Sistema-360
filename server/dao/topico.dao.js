@@ -31,7 +31,6 @@ const getTopicoByObjetivo = async function (req, res) {
 
     return await connection.query('SELECT * FROM topico WHERE objetivo LIKE ?', ['%' + objetivo + '%'])
         .then(results => {
-            console.log(results);
             return results;
         })
         .catch(err => {

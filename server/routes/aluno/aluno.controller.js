@@ -66,8 +66,8 @@ const alocarAlunoEmGrupo = (req,res) => {
                     res.send('Aluno alocado no grupo ' + req.body.idGrupo);
                 }
                 else {
-                    console.log('RA ou id da turma fornecido não existe');
-                    res.send('RA ou id da turma fornecido não existe');
+                    console.log('RA ou id da turma fornecido não existe, ou o aluno não está alocado em uma turma');
+                    res.send('RA ou id da turma fornecido não existe, ou o aluno não está alocado em uma turma');
                 }
             })
             .catch(err => {
