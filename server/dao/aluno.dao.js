@@ -44,12 +44,12 @@ const atribuirAlunoATurma = async (req, res) => {
         })
 }
 
-const alocarAlunoEmGrupo = async (req,res) => {
+const alocarAlunoEmGrupo = async (req, res) => {
     const ra = parseInt(req.ra);
     const idTurma = req.idTurma;
     const idGrupo = parseInt(req.idGrupo);
 
-    return await connection.query('UPDATE aluno_turma SET idGrupo = ? WHERE Aluno_RA = ? AND idTurma = ?',[idGrupo,ra,idTurma])
+    return await connection.query('UPDATE aluno_turma SET idGrupo = ? WHERE Aluno_RA = ? AND idTurma = ?', [idGrupo, ra, idTurma])
         .then(result => {
             return result;
         })
@@ -59,9 +59,31 @@ const alocarAlunoEmGrupo = async (req,res) => {
         })
 }
 
+const calcularNotasTurma = async (req, res) => {
+    const idTurma = req;
+    const pesoApresentacao = await connection.query('SELECT Valor FROM parametro WHERE Nome = "peso_nota" AND Chave = "apresentacao"');
+    const pesoInteracao = await connection.query('SELECT Valor FROM parametro WHERE Nome = "peso_nota" AND Chave = "interacao"');
+    const arrayNotas = await connection.query(`SELECT t.Aluno_RA AS RA, COALESCE((a.Nota + g.Nota_Grupo)/2, 0) AS NOTA_APRESENTACAO, COALESCE(p.Nota,0) AS NOTA_INTERACAO
+                                              FROM atividade_grupo g
+                                              INNER JOIN aluno_turma t ON g.idGrupo = t.idGrupo
+                                              LEFT JOIN aluno_realiza_atividade a  ON t.Aluno_RA = a.Aluno_RA
+                                              LEFT JOIN participacao p ON t.Aluno_RA = p.RA
+                                              WHERE t.idTurma = ?`, [idTurma]);
+
+    for (let i = 0; i < arrayNotas.length; i++) {
+        const ra = parseInt(arrayNotas[i].RA);
+        const notaApresentacao = parseFloat(arrayNotas[i].NOTA_APRESENTACAO) * parseFloat(pesoApresentacao[0].Valor);
+        const notaInteracao = parseFloat(arrayNotas[i].NOTA_INTERACAO) * parseFloat(pesoInteracao[0].Valor);
+
+        await connection.query('UPDATE aluno_turma SET Nota = ? WHERE Aluno_RA = ?', [notaApresentacao + notaInteracao,ra])
+            .catch(err => console.log(err));
+    }
+}
+
 module.exports = {
     getAlunoByRa,
     cadastroAluno,
     atribuirAlunoATurma,
-    alocarAlunoEmGrupo
+    alocarAlunoEmGrupo,
+    calcularNotasTurma
 }
