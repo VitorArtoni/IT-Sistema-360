@@ -63,6 +63,31 @@ module.exports = (middlewares) => {
 
     /**
      * @swagger
+     * /topico/objetivo/{objetivo}:
+     *  get:
+     *      tags:
+     *          - Tópico
+     *      description: Retorna as informações do topico de acordo com o objetivo fornecido
+     *      produces:
+     *          - application/json
+     *      parameters:
+     *          - name: objetivo
+     *            description: objetivo do topico
+     *            in: path
+     *            required: true
+     *            type: string
+     *      responses:
+     *       200:
+     *         description: Dados do tópico
+     *       400:
+     *         description: Necessário enviar um topico como parâmetro
+     *       500:
+     *         description: Erro inesperado
+     */
+    router.get('/objetivo/:objetivo', controller.getTopicoByObjetivo);
+
+    /**
+     * @swagger
      * /topico:
      *   post:
      *     tags:
@@ -79,6 +104,7 @@ module.exports = (middlewares) => {
      *           required:
      *             - idTopico
      *             - nome
+     *             - objetivo
      *             - idTurma
      *             - data
      *           properties:
@@ -87,7 +113,10 @@ module.exports = (middlewares) => {
      *               example: T1A1
      *             nome:
      *               type: string
-     *               example: A aplicação de juros compostos no dia a dia
+     *               example: Escolas de adm
+     *             objetivo:
+     *               type: string
+     *               example: Entender como funciona uma unidade sindical
      *             idTurma:
      *               type: string
      *               example: SI250A

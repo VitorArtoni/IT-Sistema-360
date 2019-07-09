@@ -14,7 +14,7 @@ const getTopicoByName = async function (req, res) {
 }
 
 const getTopicoByTurma = async function (req, res) {
-    let idTurma= req;
+    let idTurma = req;
 
     return await connection.query('SELECT * FROM topico WHERE idTurma = ?', [idTurma])
         .then(results => {
@@ -26,13 +26,28 @@ const getTopicoByTurma = async function (req, res) {
         });
 }
 
+const getTopicoByObjetivo = async function (req, res) {
+    let objetivo = req;
+
+    return await connection.query('SELECT * FROM topico WHERE objetivo LIKE ?', ['%' + objetivo + '%'])
+        .then(results => {
+            console.log(results);
+            return results;
+        })
+        .catch(err => {
+            console.log(err);
+            return err;
+        })
+}
+
 const criarTopico = async function (req, res) {
     let idTopico = req.idTopico;
     let nome = req.nome;
+    let objetivo = req.objetivo;
     let idTurma = req.idTurma;
     let data = req.data;
 
-    return await connection.query('INSERT INTO topico (idTopico, nomeTopico, idTurma, Data) VALUES (?,?,?,?)', [idTopico, nome, idTurma,data])
+    return await connection.query('INSERT INTO topico (idTopico, nomeTopico, objetivo, idTurma, Data) VALUES (?,?,?,?,?)', [idTopico, nome, objetivo, idTurma,data])
         .then(result => {
             return result;
         })
@@ -45,5 +60,6 @@ const criarTopico = async function (req, res) {
 module.exports = {
     getTopicoByName,
     getTopicoByTurma,
+    getTopicoByObjetivo,
     criarTopico
 }

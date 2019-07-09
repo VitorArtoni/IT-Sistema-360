@@ -31,13 +31,27 @@ const getTopicoByTurma = (req,res) => {
         res.status(400).send('Envie o id da turma');
 }
 
+const getTopicoByObjetivo = (req,res) => {
+    if (req.params.objetivo) {
+        db.getTopicoByObjetivo(req.params.objetivo)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(err => {
+                res.status(500).send(err);
+            })
+    }
+    else
+        res.status(400).send('Envie o objetivo do topico');
+}
+
 const criarTopico = (req,res) => {
     if (req.body.idTopico && req.body.nome 
-            && req.body.idTurma && req.body.data) {
+            && req.body.idTurma && req.body.data && req.body.objetivo) {
         db.criarTopico(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
-                    console.log('Tópico criado com sucesso');
+                    console.log('Tópico criado com sucesso');   
                     participacao.calcularEficienciaDaTurma(req.body.idTurma);
                     participacao.getNotas(req.body.idTurma);
                     res.send('Tópico "' + req.body.nome + '" criado');
@@ -58,5 +72,6 @@ const criarTopico = (req,res) => {
 module.exports = {
     getTopicoByName,
     getTopicoByTurma,
+    getTopicoByObjetivo,
     criarTopico
 }
