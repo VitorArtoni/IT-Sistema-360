@@ -114,6 +114,14 @@ const startApp = app => {
     server.listen(process.env.port, () => {
         console.log('Server started on http://localhost:' + process.env.port);
     });
+
+    process.on('unhandledRejection',(reason,p) => {
+        console.log("Unhandled Rejection at: Promise ", p, " reason: ", reason)
+    });
+
+    process.on('uncaughtException',(reason,p) => {
+        console.log("Uncaught Exception at: Promise ", p, " reason: ", reason)
+    });
 };
 
 const init = app => {
