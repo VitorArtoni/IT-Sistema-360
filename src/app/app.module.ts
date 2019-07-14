@@ -3,30 +3,20 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { CadastroComponent } from './cadastro/cadastro.component';
-import { HomeComponent } from './home/home.component';
-import { LoginService } from './login.service';
-
-import { routes } from './app.routes';
-import { LoginGuard } from './login.guard';
+import { AuthModule } from './auth/auth.module';
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    CadastroComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    routes
+    AuthModule,
+    AppRoutingModule
   ],
-  providers: [
-    LoginService,
-    LoginGuard
-  ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

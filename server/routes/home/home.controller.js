@@ -3,7 +3,7 @@
 const path = require('path');
 
 const getHome = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../dist/home.html'));
+    res.sendFile(path.join(__dirname, '../../../dist/index.html'));
 };
 
 const logout = (req, res) => {

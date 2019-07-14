@@ -9,6 +9,6 @@ export class TurmasService {
   constructor(private http: HttpClient) { }
 
   getTurmas(){
-    return this.http.get<any>('/api/turmas');
+    return this.http.get<any>('/turmas');
   }
 }

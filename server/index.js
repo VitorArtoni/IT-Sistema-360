@@ -2,57 +2,46 @@
 
 const configureApp = app => {
     const express = require('express');
-    const session = require('express-session');
     const bodyParser = require('body-parser');
+    const jwtStrategy = require('passport-jwt').Strategy;
+    const extractJwt = require('passport-jwt').ExtractJwt;
+    const passport = require('passport');
     const path = require('path');
+    const cors = require('cors');
 
     require('dotenv').config({
         silent: true
     });
 
+    const passportOptions = {
+        jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: process.env.sess_secret
+    }
+
     app.use('/swagger', express.static('api-docs'));
+    app.use(express.static('dist'));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    passport.use(new jwtStrategy(passportOptions, (jwtPayload, done) => {
+        const expirationDate = new Date(jwtPayload.exp * 1000);
+        if (expirationDate < new Date())
+            return done(null, false);
+
+        done(null, jwtPayload);
+    }))
+
+    passport.serializeUser((user, done) => {
+        done(null, user.username)
+    });
+
+    app.use(cors());
+
     app.use(bodyParser.urlencoded({
         extended: true
     }));
     app.use(bodyParser.json());
-
-    app.use(session({
-        name: process.env.sess_name,
-        resave: false,
-        saveUninitialized: false,
-        secret: process.env.sess_secret,
-        cookie: {
-            maxAge: parseInt(process.env.sess_lifetime),
-            sameSite: true,
-            secure: process.env.node_env === 'prod'
-        }
-    }));
-
-    const users = [
-        { ra: 1, name: 'Vitor', email: 'vitor@teste.com', password: 'teste123' },
-        { ra: 2, name: 'User1', email: 'user1@teste.com', password: 'teste123' },
-        { ra: 3, name: 'User2', email: 'user2@teste.com', password: 'teste123' },
-    ]
-
-    app.use((req, res, next) => {
-        const { userId } = req.session;
-        if (userId) {
-            res.locals.user = users.find(user => user.id === userId);
-        }
-        next();
-    });
-
-    let allowCrossDomain = function (req, res, next) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-access-token');
-
-        if ('OPTIONS' === req.method)
-            res.send(200, '');
-        else
-            next();
-    };
-    app.use(allowCrossDomain);
 
     app.get('/', (req, res) => {
         res.send('Hello world');
@@ -89,6 +78,7 @@ const initRoutes = app => {
     const aluno = require('./routes/aluno');
     const professor = require('./routes/professor');
     const login = require('./routes/login');
+    const logout = require('./routes/logout')
     const turmas = require('./routes/turmas');
     const grupo = require('./routes/grupo');
     const aula = require('./routes/aula');
@@ -100,6 +90,7 @@ const initRoutes = app => {
     app.use('/aluno', aluno());
     app.use('/professor', professor());
     app.use('/login', login());
+    app.use('/logout', logout());
     app.use('/turmas', turmas());
     app.use('/grupo', grupo());
     app.use('/aula', aula());
@@ -111,15 +102,16 @@ const initRoutes = app => {
 const startApp = app => {
     const http = require('http');
     const server = http.createServer(app);
+
     server.listen(process.env.port, () => {
         console.log('Server started on http://localhost:' + process.env.port);
     });
 
-    process.on('unhandledRejection',(reason,p) => {
+    process.on('unhandledRejection', (reason, p) => {
         console.log("Unhandled Rejection at: Promise ", p, " reason: ", reason)
     });
 
-    process.on('uncaughtException',(reason,p) => {
+    process.on('uncaughtException', (reason, p) => {
         console.log("Uncaught Exception at: Promise ", p, " reason: ", reason)
     });
 };

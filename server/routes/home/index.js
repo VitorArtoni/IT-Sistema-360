@@ -17,8 +17,8 @@ module.exports = (middlewares) => {
         middlewares.forEach(middleware => router.use(middleware));
     }
 
-    router.get('/', redirectLogin, controller.getHome);
-    router.get('/logout', redirectLogin, controller.logout);
+    router.get('/', controller.getHome);
+    router.get('/logout', controller.logout);
 
     return router;
 };

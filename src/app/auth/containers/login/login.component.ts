@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() { }
 
@@ -19,14 +19,16 @@ export class LoginComponent implements OnInit {
     const ra = target.querySelector('#ra').value;
     const senha = target.querySelector('#password').value;
 
-    this.loginService.loginAluno(ra, senha).subscribe(data => {
-      if (data.success) {
-        this.router.navigate(['/home']);
-        this.loginService.setLoginState(true);
+    this.authService.login(
+      {
+        username: ra,
+        password: senha
       }
-      else {
-        window.alert('Credenciais incorretas');
-      }
-    });
+    )
+      .subscribe(success => {
+        if (success) {
+          this.router.navigate(['/home']);
+        }
+      });
   }
 }

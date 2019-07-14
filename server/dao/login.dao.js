@@ -14,7 +14,7 @@ const loginProfessor = async function (req, res) {
 };
 
 const loginAluno = async function (req, res) {
-    let ra = req.ra;
+    let ra = req;
 
     return await connection.query('SELECT * FROM aluno WHERE RA = ?', [ra])
         .then(results => {

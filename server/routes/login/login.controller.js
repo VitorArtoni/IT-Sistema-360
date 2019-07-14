@@ -3,23 +3,32 @@
 const path = require('path');
 const dao = require('../../dao/login.dao');
 const bcrypt = require('bcryptjs');
+const randtoken = require('rand-token');
+const jwt = require('jsonwebtoken');
+
+let refreshTokens = {};
 
 const getLogin = (req, res) => {
     res.sendFile(path.join(__dirname, '../../../dist/index.html'));
 };
 
 const loginAluno = (req, res) => {
-    const ra = parseInt(req.body.ra);
-    const senha = req.body.senha;
+    const ra = parseInt(req.body.username);
+    const senha = req.body.password;
 
     if (ra && senha) {
-        dao.loginAluno(req.body)
+        dao.loginAluno(ra)
             .then(result => {
                 if (result.length > 0) {
                     if (bcrypt.compareSync(senha, result[0].Senha)) {
-                        req.session.userId = result[0].RA;
-                        //res.redirect('/home');
-                        res.send('Autorizado');
+                        const user = {
+                            'username': ra,
+                            'role': 'aluno'
+                        };
+                        const token = jwt.sign(user, process.env.sess_secret, { expiresIn: 600 })
+                        const refreshToken = randtoken.uid(256);
+                        refreshTokens[refreshToken] = ra;
+                        res.json({ jwt: token, refreshToken: refreshToken });
                     }
                     else {
                         console.log('Não autorizado');
@@ -43,18 +52,22 @@ const loginAluno = (req, res) => {
 };
 
 const loginProfessor = (req, res) => {
-    const matricula = parseInt(req.body.matricula);
-    const senha = req.body.senha;
+    const matricula = parseInt(req.matricula);
+    const senha = req.senha;
 
     if (matricula && senha) {
-        dao.loginProfessor(req.body)
+        dao.loginProfessor(req)
             .then(result => {
                 if (result.length > 0) {
                     if (bcrypt.compareSync(senha, result[0].Senha)) {
-                        req.session.userId = result[0].Matricula;
-                        req.session.permissao = result[0].Permissao;
-                        //res.redirect('/home');
-                        res.send('Autorizado');
+                        const user = {
+                            'username': req.matricula,
+                            'role': result[0].Permissao
+                        }
+                        const token = jwt.sign(user, process.env.sess_secret, { expiresIn: 600 })
+                        const refreshToken = randtoken.uid(256);
+                        refreshTokens[refreshToken] = req.matricula;
+                        res.json({ jwt: token, refreshToken: refreshToken });
                     }
                     else {
                         console.log('Senha inválida');
@@ -76,8 +89,36 @@ const loginProfessor = (req, res) => {
         res.status(400).send('Por favor digite matrícula e senha');
 };
 
+const logout = (req, res) => {
+    const refreshToken = req.body.refreshToken;
+    if (refreshToken in refreshTokens)
+        delete refreshTokens[refreshToken];
+
+    res.sendStatus(204);
+};
+
+const refreshAToken = (req, res) => {
+    const refreshToken = req.body.refreshToken;
+    const permissao = req.body.role;
+
+    if (refreshToken in refreshTokens) {
+        const user = {
+            'username': refreshTokens[refreshToken],
+            'role': permissao
+        }
+
+        const token = jwt.sign(user, process.env.sess_secret, { expiresIn: 600 });
+        res.json({ jwt: token })
+    }
+    else {
+        res.sendStatus(401);
+    }
+}
+
 module.exports = {
     getLogin,
     loginAluno,
-    loginProfessor
+    loginProfessor,
+    logout,
+    refreshAToken
 }

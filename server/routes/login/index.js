@@ -4,13 +4,6 @@ const express = require('express');
 
 const controller = require('./login.controller');
 
-const redirectHome = (req, res, next) => {
-    if (req.session.userId)
-        res.redirect('/home');
-    else
-        next();
-}
-
 module.exports = (middlewares) => {
     const router = express.Router();
 
@@ -18,7 +11,7 @@ module.exports = (middlewares) => {
         middlewares.forEach(middleware => router.use(middleware));
     }
 
-    //router.get('/', redirectHome, controller.getLogin);
+    router.get('/', controller.getLogin);
 
     /**
      * @swagger
@@ -89,6 +82,8 @@ module.exports = (middlewares) => {
      *          description: Erro inesperado
      */    
     router.post('/professor', controller.loginProfessor);
+
+    router.post('/refresh', controller.refreshAToken);
 
     return router;
 }
