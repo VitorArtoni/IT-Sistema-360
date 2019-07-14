@@ -17,11 +17,30 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
     const ra = target.querySelector('#ra').value;
-    const senha = target.querySelector('#password').value;
+    const senha = target.querySelector('#passwordAluno').value;
 
-    this.authService.login(
+    this.authService.loginAluno(
       {
         username: ra,
+        password: senha
+      }
+    )
+      .subscribe(success => {
+        if (success) {
+          this.router.navigate(['/home']);
+        }
+      });
+  }
+
+  loginProfessor(event) {
+    event.preventDefault();
+    const target = event.target;
+    const matricula = target.querySelector('#matricula').value;
+    const senha = target.querySelector('#passwordProfessor').value;
+
+    this.authService.loginProfessor(
+      {
+        username: matricula,
         password: senha
       }
     )

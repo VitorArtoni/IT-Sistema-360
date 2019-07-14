@@ -1,7 +1,7 @@
 const connection = require('../database');
 
 const loginProfessor = async function (req, res) {
-    let matricula = req.matricula;
+    let matricula = req;
 
     return await connection.query('SELECT * FROM professor WHERE Matricula = ?', [matricula])
         .then(results => {
@@ -15,7 +15,6 @@ const loginProfessor = async function (req, res) {
 
 const loginAluno = async function (req, res) {
     let ra = req;
-
     return await connection.query('SELECT * FROM aluno WHERE RA = ?', [ra])
         .then(results => {
             return results;

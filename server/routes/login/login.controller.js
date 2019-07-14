@@ -52,21 +52,21 @@ const loginAluno = (req, res) => {
 };
 
 const loginProfessor = (req, res) => {
-    const matricula = parseInt(req.matricula);
-    const senha = req.senha;
+    const matricula = parseInt(req.body.username);
+    const senha = req.body.password;
 
     if (matricula && senha) {
-        dao.loginProfessor(req)
+        dao.loginProfessor(matricula)
             .then(result => {
                 if (result.length > 0) {
                     if (bcrypt.compareSync(senha, result[0].Senha)) {
                         const user = {
-                            'username': req.matricula,
+                            'username': matricula,
                             'role': result[0].Permissao
                         }
                         const token = jwt.sign(user, process.env.sess_secret, { expiresIn: 600 })
                         const refreshToken = randtoken.uid(256);
-                        refreshTokens[refreshToken] = req.matricula;
+                        refreshTokens[refreshToken] = matricula;
                         res.json({ jwt: token, refreshToken: refreshToken });
                     }
                     else {

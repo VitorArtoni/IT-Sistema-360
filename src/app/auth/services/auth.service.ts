@@ -15,8 +15,19 @@ export class AuthService {
 
     constructor(private http: HttpClient) { }
 
-    login(user: { username: string, password: string }): Observable<boolean> {
+    loginAluno(user: { username: string, password: string }): Observable<boolean> {
         return this.http.post<any>(`${config.apiUrl}/login/aluno`, user)
+            .pipe(
+                tap(tokens => this.doLoginUser(user.username, tokens)),
+                mapTo(true),
+                catchError(error => {
+                    alert(error.error);
+                    return of(false);
+                }));
+    }
+
+    loginProfessor(user: { username: string, password: string }): Observable<boolean> {
+        return this.http.post<any>(`${config.apiUrl}/login/professor`, user)
             .pipe(
                 tap(tokens => this.doLoginUser(user.username, tokens)),
                 mapTo(true),
