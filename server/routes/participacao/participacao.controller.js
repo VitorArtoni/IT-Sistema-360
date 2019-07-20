@@ -15,18 +15,18 @@ const inserirContribuicao = (req, res) => {
                             throw err;
                         })
 
-                    res.send('Contribuição inserida com sucesso');
+                    res.send({response:'Contribuição inserida com sucesso'});
                 }
                 else {
-                    res.status(500).send('Não foi possível inserir a contribuição');
+                    res.status(500).send({response:'Não foi possível inserir a contribuição'});
                 }
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie os dados obrigatórios');
+        res.status(400).send({response:'Envie os dados obrigatórios'});
 }
 
 const calcularEficiencia = (req, res) => {
@@ -34,17 +34,17 @@ const calcularEficiencia = (req, res) => {
         dao.calcularEficiencia(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
-                    res.send('Eficiência calculada com sucesso');
+                    res.send({response:'Eficiência calculada com sucesso'});
                 }
                 else
-                    res.status(500).send('Não foi possível calcular a eficiência');
+                    res.status(500).send({response:'Não foi possível calcular a eficiência'});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie os dados obrigatórios');
+        res.status(400).send({response:'Envie os dados obrigatórios'});
 }
 
 const calcularMedia = (req, res) => {
@@ -55,14 +55,14 @@ const calcularMedia = (req, res) => {
                     .catch(err => {
                         throw err;
                     })
-                res.send(result);
+                res.send({response:result});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie o id da turma');
+        res.status(400).send({response:'Envie o id da turma'});
 }
 
 module.exports = {

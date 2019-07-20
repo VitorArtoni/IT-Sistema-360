@@ -36,7 +36,7 @@ const cadastrarAluno = (req, res) => {
             });
     }
     else
-        res.status(400).send('Forneça dados');
+        res.status(400).send({ response:'Forneça dados'});
 }
 
 const atribuirAlunoATurma = (req, res) => {
@@ -45,16 +45,16 @@ const atribuirAlunoATurma = (req, res) => {
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Aluno atribuído a turma ' + req.body.idTurma);
-                    res.send('Aluno atribuído a turma ' + req.body.idTurma);
+                    res.send( { response: `Aluno atribuído a turma ${req.body.idTurma}`});
                 }
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).send(err);
+                res.status(500).send({response: err});
             });
     }
     else
-        res.status(400).send('Por favor informe o id da turma e o RA');
+        res.status(400).send({response: 'Por favor informe o id da turma e o RA'});
 }
 
 const alocarAlunoEmGrupo = (req,res) => {
@@ -63,20 +63,20 @@ const alocarAlunoEmGrupo = (req,res) => {
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Aluno alocado no grupo ' + req.body.idGrupo);
-                    res.send('Aluno alocado no grupo ' + req.body.idGrupo);
+                    res.send({response:`Aluno alocado no grupo ${req.body.idGrupo}`});
                 }
                 else {
                     console.log('RA ou id da turma fornecido não existe, ou o aluno não está alocado em uma turma');
-                    res.send('RA ou id da turma fornecido não existe, ou o aluno não está alocado em uma turma');
+                    res.send({response:'RA ou id da turma fornecido não existe, ou o aluno não está alocado em uma turma'});
                 }
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Por favor informe o RA, id do grupo e id da turma');
+        res.status(400).send({response:'Por favor informe o RA, id do grupo e id da turma'});
 }
 
 module.exports = {

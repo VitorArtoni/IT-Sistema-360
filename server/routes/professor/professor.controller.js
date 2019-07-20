@@ -6,14 +6,14 @@ const buscarProfessor = (req, res) => {
     if (req.params.matricula) {
         dao.getProfessorByMatricula(req.params.matricula)
             .then(result => {
-                res.send(result);
+                res.send({response:result});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie uma matricula');
+        res.status(400).send({response:'Envie uma matricula'});
 }
 
 const cadastrarProfessor = (req, res) => {
@@ -22,19 +22,19 @@ const cadastrarProfessor = (req, res) => {
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Professor cadastrado com sucesso');
-                    res.send('Professor cadastrado com sucesso');
+                    res.send({response:'Professor cadastrado com sucesso'});
                 }
             })
             .catch(err => {
                 if (err.code === 'ER_DUP_ENTRY') {
-                    res.status(500).send('Esta matrícula já foi cadastrada');
+                    res.status(500).send({response:'Esta matrícula já foi cadastrada'});
                 }
                 else
-                    res.status(500).send(err);
+                    res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Por favor informe nome, matricula, senha e tipo de permissao');
+        res.status(400).send({response:'Por favor informe nome, matricula, senha e tipo de permissao'});
 }
 
 const atribuirTurmaAProfessor = (req, res) => {
@@ -43,19 +43,19 @@ const atribuirTurmaAProfessor = (req, res) => {
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Professor atribuído a turma ' + req.body.idTurma);
-                    res.send('Professor atribuído a turma ' + req.body.idTurma);
+                    res.send({response:`Professor atribuído a turma ${req.body.idTurma}`});
                 }
             })
             .catch(err => {
                 console.log(err);
                 if (err.code === 'ER_DUP_ENTRY')
-                    res.status(500).send('Este professor já foi atribuído a esta turma');
+                    res.status(500).send({response:'Este professor já foi atribuído a esta turma'});
                 else
-                    res.status(500).send(err);
+                    res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Por favor informe a matrícula e id da turma');
+        res.status(400).send({response:'Por favor informe a matrícula e id da turma'});
 }
 
 module.exports = {

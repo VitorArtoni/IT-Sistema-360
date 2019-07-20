@@ -7,42 +7,42 @@ const getTopicoByName = (req,res) => {
     if (req.params.nome) {
         dao.getTopicoByName(req.params.nome)
             .then(result => {
-                res.send(result);
+                res.send({response:result});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie o nome do tópico');
+        res.status(400).send({response:'Envie o nome do tópico'});
 }
 
 const getTopicoByTurma = (req,res) => {
     if (req.params.idTurma) {
         dao.getTopicoByTurma(req.params.idTurma)
             .then(result => {
-                res.send(result);
+                res.send({response:result});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie o id da turma');
+        res.status(400).send({response:'Envie o id da turma'});
 }
 
 const getTopicoByObjetivo = (req,res) => {
     if (req.params.objetivo) {
         dao.getTopicoByObjetivo(req.params.objetivo)
             .then(result => {
-                res.send(result);
+                res.send({response:result});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie o objetivo do topico');
+        res.status(400).send({response:'Envie o objetivo do topico'});
 }
 
 const criarTopico = (req,res) => {
@@ -54,19 +54,19 @@ const criarTopico = (req,res) => {
                     console.log('Tópico criado com sucesso');   
                     participacaoDao.calcularEficienciaDaTurma(req.body.idTurma);
                     participacaoDao.getNotas(req.body.idTurma);
-                    res.send('Tópico "' + req.body.nome + '" criado');
+                    res.send({response:`Tópico ${req.body.nome} criado`});
                 }
                 else {
-                    res.status(500).send('Não foi possível criar o tópico')
+                    res.status(500).send({response:'Não foi possível criar o tópico'});
                 }
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Forneça dados');
+        res.status(400).send({response:'Forneça dados'});
 }
 
 module.exports = {

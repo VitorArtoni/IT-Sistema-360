@@ -7,16 +7,16 @@ const getDataDaAula = (req, res) => {
         dao.getDataDaAula(req.params.idTurma)
             .then(result => {
                 if (result.length > 0)
-                    res.send(result);
+                    res.send({response: result});
                 else
-                    res.send('Nenhum resultado encontrado');
+                    res.send({response:'Nenhum resultado encontrado'});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie o id da turma');
+        res.status(400).send({response:'Envie o id da turma'});
 }
 
 const criarAula = (req, res) => {
@@ -25,19 +25,19 @@ const criarAula = (req, res) => {
             .then(result => {
                 if (result != 'turma_nao_existe') {
                     console.log('Aula criada com sucesso');
-                    res.send('Aula criada com sucesso');
+                    res.send({response:'Aula criada com sucesso'});
                 }
                 else {
-                    res.status(500).send('A turma fornecida não existe');
+                    res.status(500).send({response:'A turma fornecida não existe'});
                 }
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Por favor forneça o id da turma e data da aula');
+        res.status(400).send({response:'Por favor forneça o id da turma e data da aula'});
 }
 
 const marcarPresenca = (req, res) => {
@@ -46,10 +46,10 @@ const marcarPresenca = (req, res) => {
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Presença marcada com sucesso');
-                    res.send('Presença marcada com sucesso');
+                    res.send({response:'Presença marcada com sucesso'});
                 }
                 else {
-                    res.status(500).send('Não foi possível marcar a presença');
+                    res.status(500).send({response:'Não foi possível marcar a presença'});
                 }
             })
             .catch(err => {
@@ -58,7 +58,7 @@ const marcarPresenca = (req, res) => {
             });
     }
     else
-        res.status(400).send('Por favor forneça ra, id da turma, id da aula e a presença do aluno');
+        res.status(400).send({response:'Por favor forneça ra, id da turma, id da aula e a presença do aluno'});
 }
 
 module.exports = {

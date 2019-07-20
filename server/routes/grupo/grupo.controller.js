@@ -6,29 +6,29 @@ const getGrupoById = (req, res) => {
     if (req.params.id) {
         dao.getGrupoById(req.params.id)
             .then(result => {
-                res.send(result);
+                res.send({response:result});
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie o id do grupo');
+        res.status(400).send({response:'Envie o id do grupo'});
 }
 
 const getGrupoByNome = (req, res) => {
     if (req.params.nome) {
         dao.getGrupoByNome(req.params.nome)
             .then(result => {
-                res.send(result);
+                res.send({response:result});
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             })
     }
     else
-        res.status(400).send('Envie um nome');
+        res.status(400).send({response:'Envie um nome'});
 }
 
 const criarGrupo = (req, res) => {    
@@ -37,19 +37,19 @@ const criarGrupo = (req, res) => {
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Grupo criado com sucesso');
-                    res.send('Grupo ' + req.body.nome + ' criado');
+                    res.send({response:`Grupo ${req.body.nome} criado`});
                 }
                 else {
-                    res.status(500).send('Não foi possível criar o grupo')
+                    res.status(500).send({response:'Não foi possível criar o grupo'})
                 }
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Forneça dados');
+        res.status(400).send({response:'Forneça dados'});
 }
 
 module.exports = {

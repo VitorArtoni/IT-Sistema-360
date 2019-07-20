@@ -33,21 +33,21 @@ const loginAluno = (req, res) => {
                     else {
                         console.log('Não autorizado');
                         //res.redirect('/login');
-                        res.send('Não autorizado');
+                        res.status(401).send({response:'Não autorizado'});
                     }
                 }
                 else {
                     console.log('Aluno fornecido não existe');
                     //res.redirect('/login');
-                    res.status(500).send('Aluno fornecido não existe');
+                    res.status(500).send({response:'Aluno fornecido não existe'});
                 }
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Por favor digite seu RA e senha');
+        res.status(400).send({response:'Por favor digite seu RA e senha'});
     //res.redirect('/login');
 };
 
@@ -72,21 +72,21 @@ const loginProfessor = (req, res) => {
                     else {
                         console.log('Senha inválida');
                         //res.redirect('/login');
-                        res.send('Não autorizado');
+                        res.status(401).send({response:'Não autorizado'});
                     }
                 }
                 else {
                     console.log('Usuário inexistente!');
                     //res.redirect('/login');
-                    res.status(500).send('Professor fornecido não existe');
+                    res.status(500).send({response:'Professor fornecido não existe'});
                 }
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response:err});
             });
     }
     else
-        res.status(400).send('Por favor digite matrícula e senha');
+        res.status(400).send({response:'Por favor digite matrícula e senha'});
 };
 
 const logout = (req, res) => {

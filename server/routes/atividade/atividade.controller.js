@@ -22,22 +22,22 @@ const cadastrarAtividade = (req, res) => {
                 if (result2.affectedRows > 0){
                     await dao.inicializarAtividadeAlunos(req.body)
                         .then(response => {
-                            res.send('Atividade do grupo cadastrada com sucesso');
+                            res.send({response:'Atividade do grupo cadastrada com sucesso'});
                         });
                 }
                 else
-                res.status(500).send('Não foi possível cadastrar a atividade do grupo');
+                res.status(500).send({response:'Não foi possível cadastrar a atividade do grupo'});
             })
             .then(() => {
                 alunoDao.calcularNotasTurma(req.body.idTurma)
                     .catch(err => console.log(err));
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({response: err});
             })
     }
     else
-        res.status(400).send('Envie os dados obrigatórios');
+        res.status(400).send({response:'Envie os dados obrigatórios'});
 }
 
 module.exports = {
