@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
-import { config } from './../../config';
-import { Tokens } from '../models/tokens';
+import { config } from '../config';
+import { Tokens } from '../components/auth/models/tokens';
 
 @Injectable({
     providedIn: 'root'

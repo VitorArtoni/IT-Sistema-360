@@ -22,17 +22,17 @@ const cadastrarAluno = (req, res) => {
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Usuário cadastrado com sucesso');
-                    res.send('Aluno criado');
+                    res.send({ response: 'Aluno criado' });
                 }
                 else {
                     if (result.code === 'ER_DUP_ENTRY')
-                        res.status(500).send('Este RA já foi cadastrado');
+                        res.status(500).send({ response: 'Este RA já foi cadastrado' });
                     else
-                        res.status(500).send('Não foi possível cadastrar o aluno ', err);
+                        res.status(500).send({ response: `Não foi possível cadastrar o aluno ${req.body.nome}`});
                 }
             })
             .catch(err => {
-                res.status(500).send(err);
+                res.status(500).send({ response: err });
             });
     }
     else

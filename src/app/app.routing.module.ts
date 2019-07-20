@@ -1,20 +1,22 @@
-import { AuthGuard } from './auth/guards/auth.guard';
-import { HomeGuard } from './auth/guards/home.guard';
-import { LoginComponent } from './auth/containers/login/login.component';
-import { NgModule } from '@angular/core';
+import { AuthGuard } from './components/auth/guards/auth.guard';
+import { HomeGuard } from './components/auth/guards/home.guard';
+import { CadastroGuard } from './components/auth/guards/cadastro.guard';
+import { LoginComponent } from './components/auth/login/login.component';
+import { CadastroComponent } from './components/cadastro/containers/cadastro.component';
+import { HomeComponent } from './components/home/containers/home/home.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', pathMatch: 'full', redirectTo: '/login'},
-    { path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-    { path: 'home', loadChildren: './home/home.module#HomeModule', canActivate: [HomeGuard], canLoad: [HomeGuard]}
+    { path: '', redirectTo: '/login', pathMatch: 'full'},
+    { path: 'login', canActivate: [AuthGuard], children: [
+        {path: '', component: LoginComponent}
+    ]},
+    { path: 'home', canActivate: [HomeGuard], canLoad: [HomeGuard], children: [ 
+        {path: '', component: HomeComponent}
+    ]},
+    { path: 'cadastro', canActivate: [CadastroGuard], canLoad: [CadastroGuard], children: [
+        {path: '', component: CadastroComponent}
+    ]}
 ];
 
-@NgModule({
-    imports: [
-        RouterModule.forRoot(routes)
-    ],
-    exports: [RouterModule],
-    declarations: []
-})
-export class AppRoutingModule { }
+export const AppRoutingModule = RouterModule.forRoot(routes, {useHash: true});

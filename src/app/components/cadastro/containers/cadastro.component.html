@@ -13,15 +13,15 @@
 
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active p-3" role="tabpanel" aria-labelledby="tab1">
-            <form method='POST' action='/cadastro'>
+            <form (submit)="cadastrarAluno($event)">
               <div>
-                <input class="mt-2 col-11" name="nome" type="text" value="" placeholder="Digite seu nome" required />
+                <input class="mt-2 col-11" id="nome" name="nome" type="text" value="" placeholder="Digite seu nome" required />
               </div>
               <div>
-                <input class="mt-2 col-11" name="ra" type="text" value="" placeholder="Digite seu RA" required />
+                <input class="mt-2 col-11" id="ra" name="ra" type="text" value="" placeholder="Digite seu RA" required />
               </div>
               <div>
-                <input class="mt-2 col-11" name="senha" type="password" value="" placeholder="Digite sua senha" required />
+                <input class="mt-2 col-11" id="senha" name="senha" type="password" value="" placeholder="Digite sua senha" required />
               </div>
               <div>
                 <select class="mt-2 col-8" id="select-turma">
@@ -29,7 +29,7 @@
                 </select>
               </div>
               <div class="row mt-4 col-6">
-                <input class="ml-1 btn btn-primary" type="submit" value="Cadastrar" method="post"/>
+                <input class="ml-1 btn btn-primary" type="submit" value="Cadastrar"/>
               </div>
             </form>
           </div>

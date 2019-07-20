@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './containers/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { HomeGuard } from './guards/home.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';

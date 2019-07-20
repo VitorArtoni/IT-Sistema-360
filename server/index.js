@@ -46,6 +46,10 @@ const configureApp = app => {
     app.get('/', (req, res) => {
         res.send('Hello world');
     });
+
+    app.get('/cadastro', (req, res) => {
+        res.sendFile(path.join(__dirname, '../dist/index.html'));
+    });
 };
 
 const configSwagger = app => {
