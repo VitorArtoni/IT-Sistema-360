@@ -4,6 +4,7 @@ import { CadastroGuard } from './components/auth/guards/cadastro.guard';
 import { LoginComponent } from './components/auth/login/login.component';
 import { CadastroComponent } from './components/cadastro/containers/cadastro.component';
 import { HomeComponent } from './components/home/containers/home/home.component';
+import { CustomContent } from './components/content/content.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
         {path: '', component: LoginComponent}
     ]},
     { path: 'home', canActivate: [HomeGuard], canLoad: [HomeGuard], children: [ 
-        {path: '', component: HomeComponent}
+        {path: '', component: HomeComponent},
+        {path: 'turmas', component: CustomContent}
     ]},
     { path: 'cadastro', canActivate: [CadastroGuard], canLoad: [CadastroGuard], children: [
         {path: '', component: CadastroComponent}
