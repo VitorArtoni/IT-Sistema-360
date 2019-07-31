@@ -2,18 +2,17 @@
  * Angular Objects
  */
 import { BrowserModule } from '@angular/platform-browser';
-import { Injector, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { createCustomElement } from '@angular/elements';
 
 /**
  * Custom Components
  */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { CadastroComponent } from './components/cadastro/containers/cadastro.component';
-import { HomeComponent } from './components/home/containers/home/home.component';
-import { CustomContent } from './components/content/content.component';
+import { CadastroComponent } from './components/cadastro/cadastro.component';
+import { HomeComponent } from './components/home/home.component';
+import { TurmasComponent } from './components/turmas/turmas.component';
 
 /**
  * Custom Services
@@ -33,7 +32,7 @@ import { AppRoutingModule } from './app.routing.module';
     LoginComponent,
     CadastroComponent,
     HomeComponent,
-    CustomContent
+    TurmasComponent
   ],
   imports: [
     BrowserModule,
@@ -48,14 +47,8 @@ import { AppRoutingModule } from './app.routing.module';
     MessageService,
     Globals
   ],
-  entryComponents: [
-    CustomContent
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor(private injector: Injector) { 
-    const customContent = createCustomElement(CustomContent, {injector: this.injector});
-    customElements.define('custom-content',customContent);
-  }
+
 }

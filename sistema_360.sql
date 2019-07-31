@@ -120,17 +120,6 @@ CREATE TABLE `aluno` (
   `Senha` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `aluno`
---
-
-INSERT INTO `aluno` (`RA`, `Nome`, `Senha`) VALUES
-(111111, 'teste', '$2a$12$vI7mUHVzXyszxSQXlk9/iuwYr9AI0xo/WdAYbxHP.Q9mTaYmFbJRG'),
-(123456, 'João', '$2a$12$uCa1P9VyxaR7LaS0Gw8znenXoXxl2k5S0macgODtUy.49j407C.ya'),
-(174909, 'Mirelle', '$2a$12$kQyXpJbnxzjs2/nOHRUCW.bpjW4kAyQg1/xQn6trNWJAtapsGHgmC'),
-(176066, 'Rafael', '$2a$12$Ttny6rUt2Qr1.h5B2xTOwOHWWqOMycNeshb9MYhCDtlgrat2ontFG'),
-(178379, 'Vitor', '$2a$12$iU./p7G4OwhraAT80s/EXeNAYHsshZA9yAG1yHsiCp2xNVFyZMCP.');
-
 -- --------------------------------------------------------
 
 --
@@ -143,15 +132,6 @@ CREATE TABLE `aluno_presente_aula` (
   `idAula` int(11) NOT NULL,
   `Presenca` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `aluno_presente_aula`
---
-
-INSERT INTO `aluno_presente_aula` (`RA`, `Turma`, `idAula`, `Presenca`) VALUES
-(123456, 'SI250A', 5, 0.7),
-(178379, 'SI250A', 4, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -167,16 +147,6 @@ CREATE TABLE `aluno_realiza_atividade` (
   `Observacao` varchar(3000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `aluno_realiza_atividade`
---
-
-INSERT INTO `aluno_realiza_atividade` (`Aluno_RA`, `idGrupo`, `idTopico`, `idTurma`, `Nota`, `Observacao`) VALUES
-(123456, 3, 'T1A1', 'SI250A', 0, NULL),
-(174909, 4, 'T1A1', 'SI250A', 4, NULL),
-(176066, 4, 'T1A1', 'SI250A', 5, NULL),
-(178379, 4, 'T1A1', 'SI250A', 2, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -190,16 +160,6 @@ CREATE TABLE `aluno_turma` (
   `Status` set('Em Andamento','Aprovado','Reprovado','Exame') NOT NULL DEFAULT 'Em Andamento',
   `idGrupo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `aluno_turma`
---
-
-INSERT INTO `aluno_turma` (`idTurma`, `Aluno_RA`, `Nota`, `Status`, `idGrupo`) VALUES
-('SI250A', 123456, 7.7931, 'Em Andamento', 3),
-('SI250A', 174909, 4.48707, 'Em Andamento', 4),
-('SI250A', 176066, 4.16983, 'Em Andamento', 4),
-('SI250A', 178379, 8.225, 'Em Andamento', 4);
 
 -- --------------------------------------------------------
 
@@ -219,15 +179,6 @@ CREATE TABLE `atividade_grupo` (
   `Nota_Grupo` float DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `atividade_grupo`
---
-
-INSERT INTO `atividade_grupo` (`idGrupo`, `idTopico`, `idTurma`, `Observacao`, `Conformidade`, `Interesse`, `Contextualizacao`, `Consistencia`, `Nota_Grupo`) VALUES
-(1, 'T1A1', 'SI250A', '', 8, 6, 9.5, 6, 7.375),
-(3, 'T1A1', 'SI250A', '', 10, 10, 10, 10, 10),
-(4, 'T1A1', 'SI250A', '', 10, 7.5, 9.5, 9.5, 9.125);
-
 -- --------------------------------------------------------
 
 --
@@ -239,15 +190,6 @@ CREATE TABLE `aula` (
   `idTurma` varchar(12) NOT NULL,
   `Data` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `aula`
---
-
-INSERT INTO `aula` (`idAula`, `idTurma`, `Data`) VALUES
-(4, 'SI250A', '2019-04-01'),
-(5, 'SI250A', '2019-04-02'),
-(6, 'SI250A', '2019-04-03');
 
 -- --------------------------------------------------------
 
@@ -262,18 +204,6 @@ CREATE TABLE `contribuicao` (
   `Nota` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `contribuicao`
---
-
-INSERT INTO `contribuicao` (`idTopico`, `RA`, `idTurma`, `Nota`) VALUES
-('T1A1', 123456, 'SI250A', 7.5),
-('T1A1', 174909, 'SI250A', 9),
-('T1A1', 176066, 'SI250A', 6.5),
-('T1A1', 178379, 'SI250A', 5.5),
-('T1A2', 123456, 'SI250A', 6.5),
-('T1A2', 178379, 'SI250A', 9);
-
 -- --------------------------------------------------------
 
 --
@@ -284,16 +214,6 @@ CREATE TABLE `grupo` (
   `idGrupo` int(11) NOT NULL,
   `NomeGrupo` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `grupo`
---
-
-INSERT INTO `grupo` (`idGrupo`, `NomeGrupo`) VALUES
-(1, 'Grupo C'),
-(2, 'Grupo D'),
-(3, 'Grupo A'),
-(4, 'Grupo B');
 
 -- --------------------------------------------------------
 
@@ -306,14 +226,6 @@ CREATE TABLE `parametro` (
   `Chave` varchar(20) NOT NULL,
   `Valor` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `parametro`
---
-
-INSERT INTO `parametro` (`Nome`, `Chave`, `Valor`) VALUES
-('peso_nota', 'apresentacao', '0.4'),
-('peso_nota', 'interacao', '0.6');
 
 -- --------------------------------------------------------
 
@@ -328,16 +240,6 @@ CREATE TABLE `participacao` (
   `Nota` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `participacao`
---
-
-INSERT INTO `participacao` (`RA`, `idTurma`, `Eficiencia`, `Nota`) VALUES
-(123456, 'SI250A', 3.11111, 9.65517),
-(174909, 'SI250A', 1, 3.10345),
-(176066, 'SI250A', 0.722222, 2.24138),
-(178379, 'SI250A', 3.22222, 10);
-
 -- --------------------------------------------------------
 
 --
@@ -350,14 +252,6 @@ CREATE TABLE `professor` (
   `Senha` varchar(100) NOT NULL,
   `Permissao` set('Docente','PED','PAD') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `professor`
---
-
-INSERT INTO `professor` (`Matricula`, `Nome`, `Senha`, `Permissao`) VALUES
-(111111, 'Marli', '$2a$12$p.QPYjk3f6av0DaWI27BuOBenrAFMuEN4ZW7UBhmwgGtP7dXjLMiu', 'PAD'),
-(112233, 'Zambon', '$2a$12$uAcFqpbfsrb.cuziqyO3S.lS3DlfW4DzPqltE/1PGlBW8ZFyymkWK', 'Docente');
 
 -- --------------------------------------------------------
 
@@ -384,15 +278,6 @@ CREATE TABLE `topico` (
   `Data` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `topico`
---
-
-INSERT INTO `topico` (`idTopico`, `nomeTopico`, `objetivo`, `idTurma`, `Data`) VALUES
-('T1A1', 'Escolas de adm', 'Entender como funciona uma unidade sindical', 'SI250A', '2019-02-02'),
-('T1A2', 'Escolas de adm', 'Identificar qual a relação entre a produção e a padronização em uma manufatura', 'SI250A', '2019-02-03'),
-('T1A3', 'Escolas de adm', 'Entender como as tarefas são determinadas visando racionalizar o trabalho', 'SI250A', '2019-02-04');
-
 -- --------------------------------------------------------
 
 --
@@ -405,14 +290,6 @@ CREATE TABLE `turma` (
   `Semestre` set('S1','S2') NOT NULL,
   `Ano` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `turma`
---
-
-INSERT INTO `turma` (`idTurma`, `Disciplina`, `Semestre`, `Ano`) VALUES
-('SI250A', 'Economia e Finanças', 'S1', 2019),
-('SI250B', 'Economia e Finanças', 'S1', 2019);
 
 --
 -- Indexes for dumped tables

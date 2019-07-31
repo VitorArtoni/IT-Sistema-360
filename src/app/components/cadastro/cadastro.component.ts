@@ -1,8 +1,8 @@
 import { Injectable, Component, OnInit, Input } from '@angular/core';
-import { CadastroService } from '../../../services/cadastro.service';
-import { TurmasService } from '../../../services/turmas.service';
+import { CadastroService } from '../../services/cadastro.service';
+import { TurmasService } from '../../services/turmas.service';
 import { Router } from '@angular/router';
-import { Aluno } from '../model/aluno';
+import { Aluno } from './model/aluno';
 
 @Component({
   selector: 'app-cadastro',
