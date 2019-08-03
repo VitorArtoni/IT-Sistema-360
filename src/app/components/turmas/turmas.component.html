@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="well form-horizontal" (submit)="cadastrarTurma($event)">
+  <form [formGroup]="formTurmas" class="well form-horizontal" (submit)="cadastrarTurma($event)">
       <fieldset>
           <div class="form-group">
               <label class="col-md-4 control-label">Código da turma</label>
@@ -8,7 +8,7 @@
                       <span class="input-group-addon">
                           <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input id="idTurma" name="idTurma" placeholder="Código da turma" class="form-control" required="true" value="" type="text">
+                      <input formControlName="idTurma" id="idTurma" name="idTurma" placeholder="Código da turma" class="form-control" required="true" value="" type="text">
                   </div>
               </div>
               <label class="col-md-4 control-label">Disciplina</label>
@@ -17,7 +17,7 @@
                       <span class="input-group-addon">
                           <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input id="disciplina" name="disciplina" placeholder="Disciplina" class="form-control" required="true" value="" type="text">
+                      <input formControlName="disciplina" id="disciplina" name="disciplina" placeholder="Disciplina" class="form-control" required="true" value="" type="text">
                   </div>
               </div>
               <label class="col-md-4 control-label">Semestre</label>
@@ -26,16 +26,19 @@
                       <span class="input-group-addon">
                           <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input id="semestre" name="semestre" placeholder="Semestre" class="form-control" required="true" value="" type="text">
+                      <select formControlName="semestre" id="semestre" name="semestre">
+                          <option value="S1">S1</option>
+                          <option value="S2">S2</option>
+                      </select>
                   </div>
               </div>
               <label class="col-md-4 control-label">Ano</label>
-              <div class="col-md-8 inputGroupContainer">
+              <div class="col-md-2 inputGroupContainer">
                   <div class="input-group">
                       <span class="input-group-addon">
                           <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input id="ano" name="ano" placeholder="Ano" class="form-control" required="true" value="" type="text">
+                      <input formControlName="ano" id="ano" name="ano" placeholder="Ano" class="form-control" required="true" value="" type="text">
                   </div>
               </div>
               <div class="col-4">

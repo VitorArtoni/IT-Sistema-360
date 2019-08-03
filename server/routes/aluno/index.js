@@ -38,11 +38,11 @@ module.exports = (middlewares) => {
 
     /**
      * @swagger
-     * /aluno:
+     * /aluno/pre:
      *   post:
      *     tags:
      *       - Aluno
-     *     description: Cadastra um aluno
+     *     description: Pré-cadastra um aluno
      *     consumes:
      *       - application/json
      *     parameters:
@@ -54,7 +54,6 @@ module.exports = (middlewares) => {
      *           required:
      *             - nome
      *             - ra
-     *             - senha
      *           properties:
      *             nome:
      *               type: string
@@ -62,18 +61,50 @@ module.exports = (middlewares) => {
      *             ra:
      *               type: integer
      *               example: 123456
-     *             senha:
-     *               type: string
-     *               example: Joao123
      *     responses:
      *       200:
-     *          description: Aluno foi cadastrado com sucesso
+     *          description: Aluno foi pré-cadastrado com sucesso
      *       400:
      *          description: Necessário enviar todos os dados obrigatórios
      *       500:
      *          description: Erro inesperado
      */
-    router.post('/', controller.cadastrarAluno);
+    router.post('/pre', controller.preCadastrarAluno);
+
+    /**
+     * @swagger
+     * /aluno/pos:
+     *   post:
+     *     tags:
+     *       - Aluno
+     *     description: Cadastra uma senha para o aluno
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: body
+     *         name: JSON contendo os dados do aluno
+     *         required: true
+     *         schema:
+     *           type: object
+     *           required:
+     *             - ra
+     *             - senha
+     *           properties:
+     *             ra:
+     *               type: string
+     *               example: 123456
+     *             senha:
+     *               type: integer
+     *               example: joao123
+     *     responses:
+     *       200:
+     *          description: Senha do aluno foi cadastrada com sucesso
+     *       400:
+     *          description: Necessário enviar todos os dados obrigatórios
+     *       500:
+     *          description: Erro inesperado
+     */
+    router.post('/pos', controller.cadastrarSenhaAluno);
 
     /**
      * @swagger

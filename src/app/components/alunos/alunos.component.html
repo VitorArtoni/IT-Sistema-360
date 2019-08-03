@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="well form-horizontal" (submit)="cadastrarAluno($event)">
+  <form [formGroup]="formAlunos" class="well form-horizontal" (submit)="cadastrarAluno($event)">
       <fieldset>
           <div class="form-group">
               <label class="col-md-4 control-label">RA</label>
@@ -8,7 +8,7 @@
                       <span class="input-group-addon">
                           <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input id="ra" name="ra" placeholder="RA do aluno" class="form-control" required="true" value="" type="text">
+                      <input formControlName="ra" id="ra" name="ra" placeholder="RA do aluno" class="form-control" required="true" value="" type="text">
                   </div>
               </div>
               <label class="col-md-4 control-label">Nome</label>
@@ -17,7 +17,7 @@
                       <span class="input-group-addon">
                           <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input id="nome" name="nome" placeholder="Nome do aluno" class="form-control" required="true" value="" type="text">
+                      <input formControlName="nome" id="nome" name="nome" placeholder="Nome do aluno" class="form-control" required="true" value="" type="text">
                   </div>
               </div>
               <div class="col-4">

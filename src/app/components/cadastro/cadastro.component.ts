@@ -2,7 +2,7 @@ import { Injectable, Component, OnInit, Input } from '@angular/core';
 import { AlunosService } from '../../services/aluno.service';
 import { TurmasService } from '../../services/turmas.service';
 import { Router } from '@angular/router';
-import { Aluno } from './model/aluno';
+import { posAluno } from './model/aluno';
 
 @Component({
   selector: 'app-cadastro',
@@ -15,7 +15,7 @@ export class CadastroComponent implements OnInit {
   @Input()
   Turmas: any = [];
 
-  constructor(private cadastroService: AlunosService, private turmasService: TurmasService, private router: Router) { }
+  constructor(private alunosService: AlunosService, private turmasService: TurmasService, private router: Router) { }
 
   ngOnInit() {
     this.turmasService.getTurmas().subscribe(res => {
@@ -25,18 +25,20 @@ export class CadastroComponent implements OnInit {
     });
   }
 
-  cadastrarAluno(event) {
+  cadastrarSenhaAluno(event) {
     event.preventDefault();
     const target = event.target;
-    const nome = target.querySelector('#nome').value;
     const ra = target.querySelector('#ra').value;
     const senha = target.querySelector('#senha').value;
 
-    const novoAluno: Aluno = { nome,ra,senha} as Aluno;
+    const novoAluno: posAluno = { ra,senha } as posAluno;
 
-    this.cadastroService.cadastrarAluno(novoAluno)
-      .subscribe(aluno => {
-        this.router.navigate(['/login']);
+    this.alunosService.cadastrarSenhaAluno(novoAluno)
+      .subscribe(success => {
+        if (success) {
+          alert('Senha cadastrada com sucesso');
+          this.router.navigate(['/login']);
+        }
       });
   }
 }

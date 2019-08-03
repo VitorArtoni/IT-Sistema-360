@@ -16,9 +16,9 @@ const buscarAluno = (req, res) => {
         res.status(400).send('Envie um RA');
 }
 
-const cadastrarAluno = (req, res) => {
-    if (req.body.nome && req.body.ra && req.body.senha) {
-        dao.cadastroAluno(req.body)
+const preCadastrarAluno = (req, res) => {
+    if (req.body.nome && req.body.ra) {
+        dao.preCadastroAluno(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {
                     console.log('Usuário cadastrado com sucesso');
@@ -79,9 +79,30 @@ const alocarAlunoEmGrupo = (req,res) => {
         res.status(400).send({response:'Por favor informe o RA, id do grupo e id da turma'});
 }
 
+const cadastrarSenhaAluno = (req, res) => {
+    if (req.body.ra && req.body.senha) {
+        dao.cadastrarSenhaAluno(req.body)
+            .then(result => {
+                if (result.affectedRows > 0) {
+                    console.log('Senha cadastrada com sucesso');
+                    res.send({ response: 'Senha criada' });
+                }
+                else {
+                    res.status(500).send({ response: `Não foi possível criar senha para o aluno ${req.body.ra}`});
+                }
+            })
+            .catch(err => {
+                res.status(500).send({ response: err });
+            });
+    }
+    else
+        res.status(400).send({ response:'Forneça dados'});
+}
+
 module.exports = {
     buscarAluno,
-    cadastrarAluno,
+    preCadastrarAluno,
     atribuirAlunoATurma,
-    alocarAlunoEmGrupo
+    alocarAlunoEmGrupo,
+    cadastrarSenhaAluno
 }

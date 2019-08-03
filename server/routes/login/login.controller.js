@@ -32,13 +32,11 @@ const loginAluno = (req, res) => {
                     }
                     else {
                         console.log('Não autorizado');
-                        //res.redirect('/login');
                         res.status(401).send({response:'Não autorizado'});
                     }
                 }
                 else {
                     console.log('Aluno fornecido não existe');
-                    //res.redirect('/login');
                     res.status(500).send({response:'Aluno fornecido não existe'});
                 }
             })

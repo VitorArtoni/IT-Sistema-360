@@ -14,12 +14,11 @@ const getAlunoByRa = async (req, res) => {
         });
 }
 
-const cadastroAluno = async (req, res) => {
+const preCadastroAluno = async (req, res) => {
     const nome = req.nome;
     const ra = parseInt(req.ra);
-    const senha = await hash.hashPassword(req.senha);
 
-    return await connection.query('INSERT INTO aluno (RA, Nome, Senha) VALUES (?,?,?)', [ra, nome, senha])
+    return await connection.query('INSERT INTO aluno (RA, Nome, Senha) VALUES (?,?,?)', [ra, nome, ''])
         .then(result => {
             return result;
         })
@@ -27,6 +26,28 @@ const cadastroAluno = async (req, res) => {
             console.log(err);
             throw err;
         });
+}
+
+const cadastrarSenhaAluno = async (req, res) => {
+    const ra = parseInt(req.ra);
+    const senha = await hash.hashPassword(req.senha);
+
+    return await connection.query('SELECT RA FROM aluno WHERE RA = ? AND Senha = \'\'', [ra])
+        .then(result => {
+            if (result.length === 0)
+                throw 'Aluno não cadastrado ou já criou uma senha';
+
+            return true;
+        })
+        .then(async podeCriarSenha => {
+            if (podeCriarSenha)
+                return await connection.query('UPDATE aluno SET senha = ? WHERE RA = ?', [senha,ra])
+                    .catch(err => { throw err });
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        })
 }
 
 const atribuirAlunoATurma = async (req, res) => {
@@ -82,8 +103,9 @@ const calcularNotasTurma = async (req, res) => {
 
 module.exports = {
     getAlunoByRa,
-    cadastroAluno,
+    preCadastroAluno,
     atribuirAlunoATurma,
     alocarAlunoEmGrupo,
-    calcularNotasTurma
+    calcularNotasTurma,
+    cadastrarSenhaAluno
 }

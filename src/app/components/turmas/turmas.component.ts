@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TurmasService } from '../../services/turmas.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-turmas',
@@ -7,10 +8,18 @@ import { TurmasService } from '../../services/turmas.service';
   styleUrls: ['./turmas.component.css']
 })
 export class TurmasComponent implements OnInit {
+  formTurmas: FormGroup;
 
   constructor(private turmasService: TurmasService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.formTurmas = new FormGroup({
+      idTurma: new FormControl(),
+      disciplina: new FormControl(),
+      semestre: new FormControl(),
+      ano: new FormControl()
+    })
+  }
 
   cadastrarTurma(event) {
     event.preventDefault();
@@ -29,8 +38,10 @@ export class TurmasComponent implements OnInit {
       }
     )
       .subscribe(success => {
-        console.log(success);
+        if (success) {
+          alert('Turma criada com sucesso');
+          this.formTurmas.reset();
+        }        
       });
   }
-
 }
