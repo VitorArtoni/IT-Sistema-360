@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'login', canActivate: [AuthGuard], children: [
         { path: '', component: LoginComponent }
     ]},
@@ -24,7 +24,8 @@ const routes: Routes = [
     ]},
     { path: 'cadastro', canActivate: [CadastroGuard], canLoad: [CadastroGuard], children: [
         { path: '', component: CadastroComponent }
-    ]}
+    ]},
+    { path: '**', redirectTo: '/home/', pathMatch: 'full' }
 ];
 
-export const AppRoutingModule = RouterModule.forRoot(routes, {useHash: false});
+export const AppRoutingModule = RouterModule.forRoot(routes, {useHash: true});

@@ -3,19 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, mapTo } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 
+import { Globals } from '../app.globals';
 import { config } from '../config';
 import { preAluno, posAluno } from '../components/cadastro/model/aluno';
-import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AlunosService {
-    private handleError: HandleError;
 
-    constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
-        this.handleError = httpErrorHandler.createHandleError('CadastroService');
-     }
+    constructor(private http: HttpClient, private globals: Globals) { }
 
     cadastrarSenhaAluno(aluno: posAluno): Observable<boolean> {
         return this.http.post<posAluno>(`${config.apiUrl}/aluno/pos`,aluno)

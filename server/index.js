@@ -6,7 +6,6 @@ const configureApp = app => {
     const jwtStrategy = require('passport-jwt').Strategy;
     const extractJwt = require('passport-jwt').ExtractJwt;
     const passport = require('passport');
-    const path = require('path');
     const cors = require('cors');
 
     require('dotenv').config({
@@ -19,6 +18,7 @@ const configureApp = app => {
     }
 
     app.use('/swagger', express.static('api-docs'));
+    app.use('/it', express.static('dist'));
     app.use(express.static('dist'));
 
     app.use(passport.initialize());
@@ -42,14 +42,6 @@ const configureApp = app => {
         extended: true
     }));
     app.use(bodyParser.json());
-
-    app.get('/', (req, res) => {
-        res.send('Hello world');
-    });
-
-    app.get('/cadastro', (req, res) => {
-        res.sendFile(path.join(__dirname, '../dist/index.html'));
-    });
 };
 
 const configSwagger = app => {

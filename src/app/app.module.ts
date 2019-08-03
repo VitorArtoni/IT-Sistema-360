@@ -4,6 +4,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /**
@@ -40,9 +41,9 @@ import { AppRoutingModule } from './app.routing.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [ 
     AlunosService,
@@ -50,7 +51,10 @@ import { AppRoutingModule } from './app.routing.module';
     AuthService,
     HttpErrorHandler,
     MessageService,
-    Globals
+    Globals,
+    {
+      provide: APP_BASE_HREF, useValue: '/it'
+    }
   ],
   bootstrap: [AppComponent]
 })

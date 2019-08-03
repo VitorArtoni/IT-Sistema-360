@@ -4,7 +4,7 @@
   "description": "IT Sistema 360",
   "main": "index",
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "nodemon app.js & ng build --watch",
     "ng": "ng",
     "start": "concurrently \"nodemon app.js\" \"ng build --watch\"",
     "build": "ng build",
