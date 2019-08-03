@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 
 import { config } from '../config';
 import { Aluno } from '../components/cadastro/model/aluno';
-import { HttpErrorHandler, HandleError } from '../services/http-error-handler.service';
+import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class CadastroService {
+export class AlunosService {
     private handleError: HandleError;
 
     constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler) {

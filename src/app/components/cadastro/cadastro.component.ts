@@ -1,5 +1,5 @@
 import { Injectable, Component, OnInit, Input } from '@angular/core';
-import { CadastroService } from '../../services/cadastro.service';
+import { AlunosService } from '../../services/aluno.service';
 import { TurmasService } from '../../services/turmas.service';
 import { Router } from '@angular/router';
 import { Aluno } from './model/aluno';
@@ -7,7 +7,7 @@ import { Aluno } from './model/aluno';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  providers: [CadastroService],
+  providers: [AlunosService],
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent implements OnInit {
@@ -15,7 +15,7 @@ export class CadastroComponent implements OnInit {
   @Input()
   Turmas: any = [];
 
-  constructor(private cadastroService: CadastroService, private turmasService: TurmasService, private router: Router) { }
+  constructor(private cadastroService: AlunosService, private turmasService: TurmasService, private router: Router) { }
 
   ngOnInit() {
     this.turmasService.getTurmas().subscribe(res => {

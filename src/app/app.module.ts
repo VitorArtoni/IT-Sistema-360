@@ -13,11 +13,12 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { HomeComponent } from './components/home/home.component';
 import { TurmasComponent } from './components/turmas/turmas.component';
+import { AlunosComponent } from './components/alunos/alunos.component';
 
 /**
  * Custom Services
  */
-import { CadastroService } from './services/cadastro.service';
+import { AlunosService } from './services/aluno.service';
 import { TurmasService } from './services/turmas.service';
 import { AuthService } from './services/auth.service';
 import { HttpErrorHandler } from './services/http-error-handler.service';
@@ -32,7 +33,8 @@ import { AppRoutingModule } from './app.routing.module';
     LoginComponent,
     CadastroComponent,
     HomeComponent,
-    TurmasComponent
+    TurmasComponent,
+    AlunosComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { AppRoutingModule } from './app.routing.module';
     AppRoutingModule
   ],
   providers: [ 
-    CadastroService,
+    AlunosService,
     TurmasService,
     AuthService,
     HttpErrorHandler,

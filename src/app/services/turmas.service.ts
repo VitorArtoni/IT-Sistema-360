@@ -21,7 +21,7 @@ export class TurmasService {
   cadastrarTurma(turma: { idTurma: string, disciplina: string, semestre: string, ano: string}): Observable<boolean> {
     return this.http.post<any>('/turmas', turma)
       .pipe(
-        catchError(this.handleError('cadastrarAluno',turma))
+        catchError(this.handleError('cadastrarTurma',turma))
       );
   }
 }

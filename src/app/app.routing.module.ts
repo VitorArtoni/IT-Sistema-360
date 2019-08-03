@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full'},
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', canActivate: [AuthGuard], children: [
         { path: '', component: LoginComponent }
     ]},
