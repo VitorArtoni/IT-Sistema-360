@@ -100,7 +100,7 @@ const startApp = app => {
     const server = http.createServer(app);
 
     if (process.env.node_env != 'dev') {
-        server.listen(process.env.port, '0.0.0.0', () => {
+        server.listen(process.env.port, 'geicon.ft.unicamp.br', () => {
             console.log('Server started on port ' + process.env.port);
         });
     }
