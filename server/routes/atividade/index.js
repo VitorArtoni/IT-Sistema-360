@@ -70,5 +70,47 @@ module.exports = (middlewares) => {
      */
     router.post('/', controller.cadastrarAtividade);
 
+    /**
+     * @swagger
+     * /atividade/notaIndividual:
+     *   post:
+     *     tags:
+     *       - Atividade
+     *     description: Cadastra nota individual para um aluno
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: body
+     *         name: JSON contendo os dados para cadastrar uma nota individual em uma atividade
+     *         required: true
+     *         schema:
+     *           type: object
+     *           required:
+     *             - ra
+     *             - idTurma
+     *             - nota
+     *           properties:
+     *             ra: 
+     *               type: integer
+     *               example: 123456
+     *             idTurma:
+     *               type: string
+     *               example: SI250A
+     *             nota:
+     *               type: float
+     *               example: 9.0
+     *             observacao:
+     *               type: string
+     *               example: Executou de acordo com os requisitos a atividade
+     *     responses:
+     *       200:
+     *          description: Atividade cadastrada com sucesso
+     *       400:
+     *          description: Necessário enviar todos os dados obrigatórios
+     *       500:
+     *          description: Erro inesperado
+     */
+    router.post('/notaIndividual', controller.cadastrarNotaIndividual);
+
     return router;
 }

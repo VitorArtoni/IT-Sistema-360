@@ -50,8 +50,27 @@ const inicializarAtividadeAlunos = async function (req, res) {
         })
 }
 
+const inserirNotaIndividual = async function (req, res) {
+    const ra = parseInt(req.ra);
+    const idTurma = req.idTurma;
+    const observacao = req.observacao ? req.observacao : '';
+    const nota = parseFloat(req.nota);
+    const idGrupo = (await connection.query('SELECT idGrupo FROM aluno_turma WHERE Aluno_RA = ?',[ra]))[0].idGrupo;
+    const idTopico = (await connection.query('SELECT idTopico FROM atividade_grupo WHERE idGrupo = ?', [idGrupo]))[0].idTopico;
+
+    return await connection.query('INSERT INTO aluno_realiza_atividade(Aluno_RA,idGrupo,idTopico,idTurma,Nota,Observacao) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE Observacao=VALUES(Observacao), Nota=VALUES(Nota)', [ra, idGrupo, idTopico, idTurma, nota, observacao])
+        .then(result => {
+            return result;
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        })
+}
+
 module.exports = {
     inserirAtividade,
     calcularMediaGrupo,
-    inicializarAtividadeAlunos
+    inicializarAtividadeAlunos,
+    inserirNotaIndividual
 }
