@@ -86,7 +86,7 @@ const calcularNotasTurma = async (req, res) => {
     const pesoInteracao = await connection.query('SELECT Valor FROM parametro WHERE Nome = "peso_nota" AND Chave = "interacao"');
     const arrayNotas = await connection.query(`SELECT t.Aluno_RA AS RA, COALESCE((a.Nota + g.Nota_Grupo)/2, 0) AS NOTA_APRESENTACAO, COALESCE(p.Nota,0) AS NOTA_INTERACAO
                                               FROM atividade_grupo g
-                                              INNER JOIN aluno_turma t ON g.idGrupo = t.idGrupo
+                                              RIGHT JOIN aluno_turma t ON g.idGrupo = t.idGrupo
                                               LEFT JOIN aluno_realiza_atividade a  ON t.Aluno_RA = a.Aluno_RA
                                               LEFT JOIN participacao p ON t.Aluno_RA = p.RA
                                               WHERE t.idTurma = ?`, [idTurma]);
@@ -96,9 +96,14 @@ const calcularNotasTurma = async (req, res) => {
         const notaApresentacao = parseFloat(arrayNotas[i].NOTA_APRESENTACAO) * parseFloat(pesoApresentacao[0].Valor);
         const notaInteracao = parseFloat(arrayNotas[i].NOTA_INTERACAO) * parseFloat(pesoInteracao[0].Valor);
 
-        await connection.query('UPDATE aluno_turma SET Nota = ? WHERE Aluno_RA = ?', [notaApresentacao + notaInteracao,ra])
-            .catch(err => console.log(err));
+        await connection.query('UPDATE aluno_turma SET Nota = ROUND(?,2) WHERE Aluno_RA = ?', [notaApresentacao + notaInteracao,ra])
+            .catch(err => {
+                console.log(err);
+                throw err;
+            });
     }
+
+    return 'Notas calculadas com sucesso';
 }
 
 module.exports = {

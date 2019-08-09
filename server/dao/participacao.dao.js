@@ -6,7 +6,7 @@ const inserirContribuicao = async (req, res) => {
     const idTurma = req.idTurma;
     const nota = req.nota;
 
-    return await connection.query('INSERT INTO contribuicao (idTopico,RA,idTurma,Nota) VALUES (?,?,?,?)', [idTopico, ra, idTurma, nota])
+    return await connection.query('INSERT INTO contribuicao (idTopico,RA,idTurma,Nota) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE Nota=VALUES(Nota)', [idTopico, ra, idTurma, nota])
         .then(results => {
             return results;
         })

@@ -71,5 +71,28 @@ module.exports = (middlewares) => {
      */
     router.post('/', controller.criarTurma);
 
+    /**
+     * @swagger
+     * /turmas/notas/{idTurma}:
+     *  get:
+     *    tags:
+     *      - Turmas
+     *    description: Calcula e retorna a nota de todos os alunos da turma
+     *    produces:
+     *      - application/json
+     *    parameters:
+     *      - name: idTurma
+     *        description: Id da turma
+     *        in: path
+     *        required: true
+     *        type: string
+     *    responses:
+     *      200:
+     *        description: Lista de turmas
+     *      500:
+     *        description: Erro inesperado
+     */
+    router.get('/notas/:idTurma', controller.calcularNotaTurma);
+
     return router;
 }

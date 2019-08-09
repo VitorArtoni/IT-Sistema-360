@@ -1,6 +1,7 @@
 'use strict'
 
 const dao = require('../../dao/turmas.dao');
+const alunoDao = require('../../dao/aluno.dao');
 
 const getTurmas = (req, res) => {
     dao.getTurmas()
@@ -31,7 +32,18 @@ const criarTurma = (req, res) => {
     }
 }
 
+const calcularNotaTurma = (req, res) => {
+    alunoDao.calcularNotasTurma(req.params.idTurma)
+        .then(result => {
+            res.send({response:result});
+        })
+        .catch(err => {
+            res.status(500).send({response:err});
+        })
+}
+
 module.exports = {
     getTurmas,
-    criarTurma
+    criarTurma,
+    calcularNotaTurma
 }
