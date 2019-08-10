@@ -288,7 +288,8 @@ CREATE TABLE `turma` (
   `idTurma` varchar(20) NOT NULL,
   `Disciplina` varchar(100) NOT NULL,
   `Semestre` set('S1','S2') NOT NULL,
-  `Ano` int(11) NOT NULL
+  `Ano` int(11) NOT NULL,
+  `HorasAula` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
