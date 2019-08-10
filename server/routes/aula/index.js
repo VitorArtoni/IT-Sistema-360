@@ -73,16 +73,16 @@ module.exports = (middlewares) => {
 
     /**
      * @swagger
-     * /aula/presenca:
+     * /aula/falta:
      *   post:
      *     tags:
      *       - Aula
-     *     description: Marca presença para um aluno
+     *     description: Marcar falta para um aluno
      *     consumes:
      *       - application/json
      *     parameters:
      *       - in: body
-     *         name: JSON contendo RA, idTurma, idAula e presenca
+     *         name: JSON contendo RA, idTurma, idAula e falta
      *         required: true
      *         schema:
      *           type: object
@@ -90,7 +90,7 @@ module.exports = (middlewares) => {
      *             - RA
      *             - idTurma
      *             - idAula
-     *             - presenca
+     *             - falta
      *           properties:
      *             ra:
      *               type: string
@@ -101,18 +101,18 @@ module.exports = (middlewares) => {
      *             idAula:
      *               type: integer
      *               example: 1
-     *             presenca:
+     *             falta:
      *               type: float
-     *               example: 0.8
+     *               example: 0.5
      *     responses:
      *       200:
-     *          description: Presenca marcada
+     *          description: Falta marcada
      *       400:
      *          description: Necessário enviar todos os dados obrigatórios
      *       500:
      *          description: Erro inesperado
      */ 
-    router.post('/presenca', controller.marcarPresenca);
+    router.post('/falta', controller.marcarFalta);
 
     return router;
 }

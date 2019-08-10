@@ -40,9 +40,9 @@ const criarAula = (req, res) => {
         res.status(400).send({response:'Por favor forneça o id da turma e data da aula'});
 }
 
-const marcarPresenca = (req, res) => {
-    if (req.body.ra && req.body.idTurma && req.body.idAula && req.body.presenca) {
-        dao.marcarPresenca(req.body)
+const marcarFalta = (req, res) => {
+    if (req.body.ra && req.body.idTurma && req.body.idAula && req.body.falta) {
+        dao.marcarFalta(req.body)
             .then(result => {
                 if (parseInt(result.affectedRows) > 0) {
                     console.log('Presença marcada com sucesso');
@@ -64,5 +64,5 @@ const marcarPresenca = (req, res) => {
 module.exports = {
     getDataDaAula,
     criarAula,
-    marcarPresenca
+    marcarFalta
 }

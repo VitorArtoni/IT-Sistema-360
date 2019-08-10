@@ -15,7 +15,7 @@ const getTurmas = (req, res) => {
 
 const criarTurma = (req, res) => {
     if (req.body.idTurma && req.body.disciplina
-        && req.body.semestre && req.body.ano) {
+        && req.body.semestre && req.body.ano && req.body.horasAula) {
         dao.criarTurma(req.body)
             .then(result => {
                 if (result.affectedRows > 0) {

@@ -61,6 +61,9 @@ module.exports = (middlewares) => {
      *             ano:
      *               type: integer
      *               example: 2019
+     *             horasAula:
+     *               type: integer
+     *               example: 4
      *     responses:
      *       200:
      *          description: Turma foi cadastrada com sucesso

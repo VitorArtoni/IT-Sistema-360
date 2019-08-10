@@ -16,8 +16,9 @@ const criarTurma = async function(req,res){
     let disciplina = req.disciplina;
     let semestre = req.semestre;
     let ano = parseInt(req.ano);
+    let horasAula = parseInt(req.horasAula);
 
-    return await connection.query('INSERT INTO turma (idTurma,Disciplina,Semestre,Ano) VALUES (?,?,?,?)', [idTurma,disciplina,semestre,ano])
+    return await connection.query('INSERT INTO turma (idTurma,Disciplina,Semestre,Ano,HorasAula) VALUES (?,?,?,?,?)', [idTurma,disciplina,semestre,ano,horasAula])
         .then(results => {
             return results;
         })
