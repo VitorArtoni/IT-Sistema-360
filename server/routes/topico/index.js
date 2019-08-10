@@ -22,7 +22,7 @@ module.exports = (middlewares) => {
      *          - application/json
      *      parameters:
      *          - name: nome
-     *            description: nome do grupo
+     *            description: nome do tópico
      *            in: path
      *            required: true
      *            type: string
