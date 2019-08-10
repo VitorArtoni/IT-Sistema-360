@@ -99,16 +99,9 @@ const startApp = app => {
     const http = require('http');
     const server = http.createServer(app);
 
-    if (process.env.node_env != 'dev') {
-        server.listen(process.env.port, 'geicon.ft.unicamp.br', () => {
-            console.log('Server started on port ' + process.env.port);
-        });
-    }
-    else {
-        server.listen(process.env.port, () => {
-            console.log('Server started on http://localhost:' + process.env.port);
-        });
-    }
+    server.listen(process.env.port, () => {
+        console.log('Server started on port ' + process.env.port);
+    });
 
     process.on('unhandledRejection', (reason, p) => {
         console.log("Unhandled Rejection at: Promise ", p, " reason: ", reason)
